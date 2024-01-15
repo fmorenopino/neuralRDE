@@ -71,6 +71,8 @@ class NeuralRDE(nn.Module):
         initial, logsig = inputs
         h0 = self.initial_linear(initial)
 
+        #print(str(h0.device))
+
         # Perform the adjoint operation
         out = rdeint(
             logsig, h0, self.func, method=self.solver, adjoint=self.adjoint, return_sequences=self.return_sequences
@@ -78,6 +80,8 @@ class NeuralRDE(nn.Module):
 
         # Outputs
         outputs = self.final_linear(out[:, -1, :]) if not self.return_sequences else self.final_linear(out)
+
+        
 
         return outputs
 
