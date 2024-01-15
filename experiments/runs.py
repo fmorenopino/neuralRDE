@@ -103,3 +103,4 @@ def run_all(gpu_idxs=None):
 
 
 
+run('TSR', 'BIDMC32HR', 'hyperopt')

@@ -16,6 +16,15 @@ default = {
     },
     'hyperopt': {
         'model_type': ['nrde'],
+        'depth': [2],
+        'step': [512],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [3],
+        'num_layers': [3],
+        'seed': [1234],
+    },
+    'hyperopt-original': {
+        'model_type': ['nrde'],
         'depth': [1],
         'step': [1],
         'hidden_dim': [16, 32, 64],

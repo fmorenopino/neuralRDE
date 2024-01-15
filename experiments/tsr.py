@@ -1,5 +1,7 @@
 import argparse
+import sys
 from sacred import Experiment
+sys.path.append('/nfs/home/fernandom/github/neuralRDE')
 from experiments.utils.setup import create_fso, basic_gridsearch, config_parallelisation, handle_resume, attach_states
 from experiments.ingredients.trainer import train_ingredient, train
 from experiments.ingredients.prepare_data import data_ingredient, ready_all_data_and_model
@@ -9,14 +11,14 @@ from experiments.configurations import configs
 # CLI's for paralellisation
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--folder', help='Folder that holds the data.', default='TSR')
-parser.add_argument('-ds', '--dataset', help='The name of the dataset to run.', default='BIDMC32HR')
-parser.add_argument('-c', '--config', help='The config argument.', default='main-odernn')
+parser.add_argument('-ds', '--dataset', help='The name of the dataset to run.', default='BIDMC32RR')
+parser.add_argument('-c', '--config', help='The config argument.', default='hyperopt')
 # parser.add_argument('-rm', '--remove_folder', help='Removes the folder if exists and restarts.', action='store_true')
 parser.add_argument('-rm', '--remove_folder', help='Removes the folder if exists and restarts.', action='store_false')
 parser.add_argument('-t', '--test', help='Set in a small epoch test mode.', action='store_true')
 parser.add_argument('-gpu', '--gpu_idx', help='The index of the GPU to run on.', default=0, type=int)
 parser.add_argument('-igpu', '--igpu', help='Integer identifier of the GPU from ngpus.', default=0, type=int)
-parser.add_argument('-ngpus', '--num_gpus', help='The total number of GPUs', default=0, type=int)
+parser.add_argument('-ngpus', '--num_gpus', help='The total number of GPUs', default=1, type=int)
 args = parser.parse_args()
 
 # Save folder
@@ -108,6 +110,6 @@ if __name__ == '__main__':
         lambda params: (params['model_type'] not in ['nrde', 'logsig-rnn']) and (params['depth'] > 1),
         lambda params: (params['model_type'] in ['nrde', 'logsig-rnn'] and params['depth'] > 1 and params['step'] == 1)
     ]
-
+    #configuration['data__batch_size'] = [20000]
     # Gridsearch it
     basic_gridsearch(ex, configuration, param_drops=param_drops)

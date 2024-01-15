@@ -86,7 +86,10 @@ def train(model,
     Returns:
         (results:dict, validation_history:dict): The results of the best model and the full training history.
     """
-    device = set_device(gpu_if_available, gpu_idx=gpu_idx)
+    torch.cuda.init()
+    device = set_device(gpu_if_available, gpu_idx=0)
+    model.to(device)
+    #device = set_device(gpu_if_available, gpu_idx=gpu_idx)
     loss_fn = set_loss(loss_str)
     lr = set_lr(train_dl) if lr is None else lr
     optimizer = setup_optimizer(model, optimizer_name, lr)
