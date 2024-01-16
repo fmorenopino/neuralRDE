@@ -15,6 +15,7 @@ from ncdes.data.scalers import TrickScaler
 from ncdes.data.dataset import FixedCDEDataset, FlexibleCDEDataset, SubsampleDataset
 from ncdes.data.intervals import FixedIntervalSampler, RandomSampler, BatchIntervalSampler
 from ncdes.data.functions import linear_interpolation
+from get_data.eigenworms import EigenWorms
 
 data_ingredient = Ingredient('data')
 
@@ -58,34 +59,43 @@ def ready_all_data_and_model(_run,
     # Get the raw data
     train_data, val_data, test_data, output_dim, return_sequences = process_data(model_type=model_type)
 
-    if 'folded' in model_type:
-        def perform_fold(controls):
-            L = controls.size(1)
-            zeros = torch.zeros(controls.size(0), step - L % step, controls.size(2))
-            new_controls = torch.cat([controls, zeros], 1)
-            folded = new_controls.reshape(new_controls.size(0), int(new_controls.size(1) / step), -1)
-            return folded
-        train_data[0] = perform_fold(train_data[0])
-        val_data[0] = perform_fold(val_data[0])
-        test_data[0] = perform_fold(test_data[0])
-        step = 1
-        model_type = model_type.split('_')[0]
-        assert model_type in ['nrde', 'rnn', 'gru', 'odernn']
+    #Fernando:
+    if type(train_data) != torch.utils.data.dataloader.DataLoader: #Original Datasets
+        if 'folded' in model_type: 
+            def perform_fold(controls):
+                L = controls.size(1)
+                zeros = torch.zeros(controls.size(0), step - L % step, controls.size(2))
+                new_controls = torch.cat([controls, zeros], 1)
+                folded = new_controls.reshape(new_controls.size(0), int(new_controls.size(1) / step), -1)
+                return folded
+            train_data[0] = perform_fold(train_data[0])
+            val_data[0] = perform_fold(val_data[0])
+            test_data[0] = perform_fold(test_data[0])
+            step = 1
+            model_type = model_type.split('_')[0]
+            assert model_type in ['nrde', 'rnn', 'gru', 'odernn']
 
-    # Setup as datasets
-    train_ds, train_sampler = build_dataset(model_type=model_type, data=train_data, depth=depth, step=step)
-    val_ds, val_sampler = build_dataset(model_type=model_type, data=val_data, depth=depth, step=step)
-    test_ds, test_sampler = build_dataset(model_type=model_type, data=test_data, depth=depth, step=step)
+        # Setup as datasets
+        train_ds, train_sampler = build_dataset(model_type=model_type, data=train_data, depth=depth, step=step)
+        val_ds, val_sampler = build_dataset(model_type=model_type, data=val_data, depth=depth, step=step)
+        test_ds, test_sampler = build_dataset(model_type=model_type, data=test_data, depth=depth, step=step)
 
-    # Setup as datasets
-    train_dl = build_dataloader(train_ds, sampler=train_sampler)
-    val_dl = build_dataloader(val_ds, sampler=val_sampler)
-    test_dl = build_dataloader(test_ds, sampler=test_sampler)
+        # Setup as datasets
+        train_dl = build_dataloader(train_ds, sampler=train_sampler)
+        val_dl = build_dataloader(val_ds, sampler=val_sampler)
+        test_dl = build_dataloader(test_ds, sampler=test_sampler)
 
-    # Some params
-    input_dim = train_ds.input_dim
-    initial_dim = train_ds.initial_dim if model_type == 'nrde' else None
-
+        # Some params
+        input_dim = train_ds.input_dim
+        initial_dim = train_ds.initial_dim if model_type == 'nrde' else None
+    else:
+        # Setup as datasets
+        train_dl = train_data
+        val_dl = val_data
+        test_dl = test_data
+        # Setup as datasets
+        input_dim = 6
+        initial_dim = input_dim if model_type == 'nrde' else None
     # Get model
     model = None
     if not ignore_model:
@@ -110,7 +120,26 @@ def process_data(ds_folder, ds_name, missing_rate, include_observational_intensi
     elif ds_folder == 'TSR':
         controls, responses, output_dim, return_sequences, original_idxs = get_tsr_data(ds_name=ds_name)
     elif ds_folder in ['UEA', 'SpeechCommands']:
-        controls, responses, output_dim, return_sequences, original_idxs = get_classification_data(ds_name, ds_folder)
+        #controls, responses, output_dim, return_sequences, original_idxs = get_classification_data(ds_name, ds_folder)
+        #Fernando 
+
+        eigenworms = EigenWorms()
+        train_dataset, valid_dataset, test_dataset = eigenworms.get_eigenworms()
+
+        seq_length = train_dataset[0][0].shape[0]
+        seq_length_orig = seq_length
+
+        num_features = train_dataset[0][0].shape[1]
+        num_samples = len(train_dataset)
+        num_classes = 5
+
+        data_loader = DataLoader(train_dataset, shuffle=True, batch_size=10000)
+        val_loader = DataLoader(valid_dataset, shuffle=False, batch_size=len(valid_dataset))
+        test_loader = DataLoader(test_dataset, shuffle=False, batch_size=len(test_dataset))
+        
+        print ('using our own dataloader')
+        return data_loader, val_loader, test_loader, 1, False
+        #Fernando
     elif ds_folder == 'PhysioNet':
         if ds_name == 'Mortality2012':
             controls, responses, output_dim, return_sequences, original_idxs = get_physionet2012_data()
