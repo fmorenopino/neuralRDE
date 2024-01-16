@@ -18,8 +18,8 @@ def get_classification_data(ds_name, ds_folder=''):
     # Load raw
     folder_str = '' if ds_folder == '' else '/' + ds_folder
     loc = DATA_DIR + '/processed' + folder_str + '/' + ds_name
-    controls = load_pickle(loc + '/data.pkl')
-    responses = load_pickle(loc + '/labels.pkl').long().view(-1)
+    controls = load_pickle('/nfs/home/fernandom/github/neuralRDE/data/processed/UEA/EigenWorms/data.pkl')
+    responses = load_pickle('/nfs/home/fernandom/github/neuralRDE/data/processed/UEA/EigenWorms/labels.pkl').long().view(-1)
 
     # Ensure responses start at 0
     responses = responses - responses.min()

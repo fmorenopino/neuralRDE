@@ -154,7 +154,8 @@ class EigenWorms():
             data_expand = data.applymap(lambda x: x.values).values
             # Single array, then to tensor
             data_numpy = np.stack([np.vstack(x).T for x in data_expand])
-            return data_numpy
+            tensor_data = torch.Tensor(data_numpy)
+            return tensor_data
 
         train_data, test_data = convert_data(train_data), convert_data(test_data)
 

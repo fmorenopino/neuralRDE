@@ -120,9 +120,9 @@ def process_data(ds_folder, ds_name, missing_rate, include_observational_intensi
     elif ds_folder == 'TSR':
         controls, responses, output_dim, return_sequences, original_idxs = get_tsr_data(ds_name=ds_name)
     elif ds_folder in ['UEA', 'SpeechCommands']:
-        #controls, responses, output_dim, return_sequences, original_idxs = get_classification_data(ds_name, ds_folder)
+        controls, responses, output_dim, return_sequences, original_idxs = get_classification_data(ds_name, ds_folder)
         #Fernando 
-
+        """
         eigenworms = EigenWorms()
         train_dataset, valid_dataset, test_dataset = eigenworms.get_eigenworms()
 
@@ -139,6 +139,7 @@ def process_data(ds_folder, ds_name, missing_rate, include_observational_intensi
         
         print ('using our own dataloader')
         return data_loader, val_loader, test_loader, 1, False
+        """
         #Fernando
     elif ds_folder == 'PhysioNet':
         if ds_name == 'Mortality2012':

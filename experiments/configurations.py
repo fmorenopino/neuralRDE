@@ -16,10 +16,10 @@ default = {
     },
     'hyperopt': {
         'model_type': ['nrde'],
-        'depth': [2],
-        'step': [128, 512],
-        'hidden_dim': [64],
-        'hidden_hidden_multiplier': [3],
+        'depth': [2, 3],
+        'step': [4, 32, 128],
+        'hidden_dim': [32],
+        'hidden_hidden_multiplier': [2],
         'num_layers': [3],
         'seed': [1234],
     },
@@ -90,7 +90,7 @@ configs = {
             'hyperopt': {
                 **default['hyperopt'],
                 'data__batch_size': [1024],
-                'step': [36]    # Total steps [500]
+                'step': [4, 32, 128]    # Total steps [500]
             },
             'hyperopt-odernn': {
                 **default['hyperopt-odernn'],

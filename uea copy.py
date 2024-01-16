@@ -10,7 +10,7 @@ from tqdm import tqdm
 #from sktime.utils.load_data import load_from_arff_to_dataframe
 from sktime.datasets import load_from_tsfile_to_dataframe
 from sklearn.preprocessing import LabelEncoder
-from helpers import download_url, unzip, mkdir_if_not_exists, save_pickle
+from get_data.helpers import download_url, unzip, mkdir_if_not_exists, save_pickle
 from get_data.eigenworms import EigenWorms
 
 DATA_DIR = '../data'
@@ -124,6 +124,22 @@ def convert_all_files(dataset='uea'):
 
 def convert_all_files_Fernando():
     eigenworms = EigenWorms()
+
+    train_arff =  '/nfs/home/fernandom/github/neuralRDE/data/eigenworms/raw/EigenWorms_TRAIN.arff'
+    test_arff = '/nfs/home/fernandom/github/neuralRDE/data/eigenworms/raw/EigenWorms_TEST.arff'
+    train_data, test_data, train_labels, test_labels = eigenworms.create_torch_data(train_arff,test_arff)
+    
+    # Compile train and test data together
+    data = torch.cat([train_data, test_data])
+    labels = torch.cat([train_labels, test_labels])
+
+    # Save original train test indexes in case we wish to use original splits
+    original_idxs = (np.arange(0, train_data.size(0)), np.arange(train_data.size(0), data.size(0)))
+
+    # Save data
+    save_pickle(data, '/nfs/home/fernandom/github/neuralRDE/data/eigenworms/processed/data.pkl')
+    save_pickle(labels, '/nfs/home/fernandom/github/neuralRDE/data/eigenworms/processed/labels.pkl')
+    save_pickle(original_idxs, '/nfs/home/fernandom/github/neuralRDE/data/eigenworms/processed/original_idxs.pkl')
 
 
 if __name__ == '__main__':
