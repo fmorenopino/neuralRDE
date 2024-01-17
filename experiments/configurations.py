@@ -23,6 +23,15 @@ default = {
         'num_layers': [3],
         'seed': [1234],
     },
+    'hyperopt-test': {
+        'model_type': ['nrde'],
+        'depth': [3],
+        'step': [4],
+        'hidden_dim': [32],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [3],
+        'seed': [111, 222, 333],
+    },
     'hyperopt-original': {
         'model_type': ['nrde'],
         'depth': [1],
@@ -91,6 +100,10 @@ configs = {
                 **default['hyperopt'],
                 'data__batch_size': [1024],
                 'step': [4, 32, 128]    # Total steps [500]
+            },
+            'hyperopt-test': {
+                **default['hyperopt-test'],
+                'data__batch_size': [1024]
             },
             'hyperopt-odernn': {
                 **default['hyperopt-odernn'],

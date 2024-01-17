@@ -12,7 +12,7 @@ from configurations import configs
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--folder', help='Folder that holds the data.', default='UEA')
 parser.add_argument('-ds', '--dataset', help='The name of the dataset to run.', default='EigenWorms')
-parser.add_argument('-c', '--config', help='The config argument.', default='hyperopt')#test
+parser.add_argument('-c', '--config', help='The config argument.', default='hyperopt-test')#test, hyperopt
 parser.add_argument('-rm', '--remove_folder', help='Removes the folder if exists and restarts.', action='store_false')
 # parser.add_argument('-rm', '--remove_folder', help='Removes the folder if exists and restarts.', action='store_false')
 parser.add_argument('-t', '--test', help='Set in a small epoch test mode.', action='store_true')
