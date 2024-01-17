@@ -37,6 +37,39 @@ class RNN(nn.Module):
         return outputs
 
 
+#Fernando
+class LSTM(nn.Module):
+    """ Standard LSTM. """
+    def __init__(self, input_dim, hidden_dim, output_dim, num_layers=1, bias=True, dropout=0,
+                 return_sequences=True):
+        super(LSTM, self).__init__()
+
+        self.input_dim = input_dim
+        self.hidden_dim = hidden_dim
+        self.output_dim = output_dim
+        self.num_layers = num_layers
+        self.bias = bias
+        self.dropout = dropout
+        self.return_sequences = return_sequences
+
+        self.lstm = nn.LSTM(input_size=input_dim,
+                            hidden_size=hidden_dim,
+                            num_layers=num_layers,
+                            bias=bias,
+                            dropout=dropout,
+                            batch_first=True)
+        self.final_linear = nn.Linear(hidden_dim, output_dim)
+
+    def forward(self, x):
+        # Run the LSTM
+        h_full, (h_final, _) = self.lstm(x)
+
+        # Terminal output if classification else return all outputs
+        h_final_in = h_final[:, -1, :] if h_final.dim() == 3 else h_final[-1]
+        outputs = self.final_linear(h_final_in) if not self.return_sequences else self.final_linear(h_full)
+
+        return outputs
+
 class GRU(nn.Module):
     """ Standard GRU. """
     def __init__(self, input_dim, hidden_dim, output_dim, num_layers=1, bias=True, dropout=0,

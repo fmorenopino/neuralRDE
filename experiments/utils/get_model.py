@@ -4,7 +4,7 @@ common.py
 Training functions common to all experiment runs.
 """
 import numpy as np
-from experiments.nets.rnn import RNN, GRU
+from experiments.nets.rnn import RNN, GRU, LSTM
 from experiments.nets.neural import ODE_RNN
 from experiments.nets.grud import GRUD
 from ncdes import NeuralRDE
@@ -36,6 +36,8 @@ def get_model(model_type,
             model = RNN(input_dim, hidden_dim, output_dim, num_layers=num_layers, return_sequences=return_sequences)
         elif model_type == 'rnn':
             model = RNN(input_dim, hidden_dim, output_dim, num_layers=num_layers, return_sequences=return_sequences)
+        elif model_type == 'lstm':
+            model = LSTM(input_dim, hidden_dim, output_dim, num_layers=num_layers, return_sequences=return_sequences)
         elif model_type in ['gru', 'gru-dt']:
             model = GRU(input_dim, hidden_dim, output_dim, num_layers=num_layers, return_sequences=return_sequences)
         elif model_type == 'grud':

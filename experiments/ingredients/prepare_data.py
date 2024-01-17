@@ -73,7 +73,7 @@ def ready_all_data_and_model(_run,
             test_data[0] = perform_fold(test_data[0])
             step = 1
             model_type = model_type.split('_')[0]
-            assert model_type in ['nrde', 'rnn', 'gru', 'odernn']
+            assert model_type in ['nrde', 'rnn', 'gru', 'odernn', 'lstm']
 
         # Setup as datasets
         train_ds, train_sampler = build_dataset(model_type=model_type, data=train_data, depth=depth, step=step)
@@ -204,7 +204,7 @@ def build_dataset(model_type, sampler_name, data, depth, step):
             sampler = None
         else:
             dataset = FlexibleCDEDataset(*data, depth)
-    elif model_type in ['gru', 'rnn', 'odernn', 'gru-dt', 'gru-d']:
+    elif model_type in ['gru', 'rnn', 'odernn', 'gru-dt', 'gru-d', 'lstm']:
         dataset = SubsampleDataset(*data)
     else:
         raise NotImplementedError('model_type:{} not implemented.'.format(model_type))

@@ -16,8 +16,8 @@ default = {
     },
     'hyperopt': {
         'model_type': ['nrde'],
-        'depth': [2, 3],
-        'step': [4, 32, 128],
+        'depth': [2],
+        'step': [2],
         'hidden_dim': [32],
         'hidden_hidden_multiplier': [2],
         'num_layers': [3],
@@ -41,14 +41,50 @@ default = {
         'num_layers': [1, 2, 3],
         'seed': [1234],
     },
+    'rnn': {
+        'model_type': ['rnn'],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [16, 32, 64, 128, 256],
+        'hidden_hidden_multiplier': [2, 3],
+        'num_layers': [2, 3],
+        'seed': [1234],
+    },
+    'lstm': {
+        'model_type': ['lstm'],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [16, 32, 64, 128, 256],
+        'hidden_hidden_multiplier': [2, 3],
+        'num_layers': [2, 3],
+        'seed': [1234],
+    },
+    'gru': {
+        'model_type': ['gru'],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [16, 32, 64, 128, 256],
+        'hidden_hidden_multiplier': [2, 3],
+        'num_layers': [2, 3],
+        'seed': [1234],
+    },
     'hyperopt-odernn': {
         'model_type': ['odernn_folded'],
         'depth': [1],
-        'step': [1,4,8,32,128],
-        'hidden_dim': [8, 16, 32, 64, 128, 256, 388],
+        'step': [1],
+        'hidden_dim': [8],
         'hidden_hidden_multiplier': [3],
         'num_layers': [1],
         'seed': [0],
+    },
+    'hyperopt-logsig-rnn': {
+        'model_type': ['logsig-rnn'],
+        'depth': [1, 2, 3],
+        'step': [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048],
+        'hidden_dim': [8, 16, 32, 64, 128, 256, 388],
+        'hidden_hidden_multiplier': [3],
+        'num_layers': [1, 2, 3],
+        'seed': [1234],
     },
     'main': {
         # Data
@@ -98,16 +134,32 @@ configs = {
             },
             'hyperopt': {
                 **default['hyperopt'],
-                'data__batch_size': [1024],
-                'step': [4, 32, 128]    # Total steps [500]
+                'data__batch_size': [2]
+                #'step': [4, 32, 128]    # Total steps [500]
             },
             'hyperopt-test': {
                 **default['hyperopt-test'],
                 'data__batch_size': [1024]
             },
+            'rnn': {
+                **default['rnn'],
+                'data__batch_size': [1024]
+            },
+            'lstm': {
+                **default['lstm'],
+                'data__batch_size': [1024]
+            },
+            'gru': {
+                **default['gru'],
+                'data__batch_size': [1024]
+            },
             'hyperopt-odernn': {
                 **default['hyperopt-odernn'],
-                'data__batch_size': [512],
+                'data__batch_size': [2],
+            },
+            'hyperopt-logsig-rnn': {
+                **default['hyperopt-logsig-rnn'],
+                'data__batch_size': [1024],
             },
             'main': {
                 **default['main'],
