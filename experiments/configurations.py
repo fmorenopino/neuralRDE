@@ -44,7 +44,7 @@ default = {
     'hyperopt-odernn': {
         'model_type': ['odernn_folded'],
         'depth': [1],
-        'step': [8],
+        'step': [1,4,8,32,128],
         'hidden_dim': [8, 16, 32, 64, 128, 256, 388],
         'hidden_hidden_multiplier': [3],
         'num_layers': [1],
