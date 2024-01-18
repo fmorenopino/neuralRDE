@@ -71,7 +71,7 @@ default = {
     'hyperopt-odernn': {
         'model_type': ['odernn_folded'],
         'depth': [1],
-        'step': [1],
+        'step': [128],
         'hidden_dim': [8],
         'hidden_hidden_multiplier': [3],
         'num_layers': [1],
@@ -155,7 +155,7 @@ configs = {
             },
             'hyperopt-odernn': {
                 **default['hyperopt-odernn'],
-                'data__batch_size': [2],
+                'data__batch_size': [512],
             },
             'hyperopt-logsig-rnn': {
                 **default['hyperopt-logsig-rnn'],

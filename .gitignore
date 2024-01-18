@@ -61,6 +61,7 @@ coverage.xml
 # exclude models from source control by default
 /models/
 /models_tmp/
+/models_tmp*
 
 # Mac OS-specific storage files
 .DS_Store

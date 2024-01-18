@@ -6,7 +6,7 @@ Dataset classes for use with the rough differential equations setup.
 import torch
 from torch.utils.data import Dataset
 import signatory
-
+import random
 
 class Path(Dataset):
     """Dataset that abstractly defines a path via signatures.
@@ -252,6 +252,15 @@ class SubsampleDataset:
         idxs = [intervals[0][0]] + [i[-1] - 1 for i in intervals]
         inputs = self.controls[batch_idx]
         inputs = inputs[:, idxs]
+
+        """ 
+        #Fernando - RANDOM DROP
+        num = inputs.shape[1] // 2
+        idxs_keep = sorted(random.sample(range(inputs.shape[1]), num))
+        inputs = inputs[:, idxs_keep, :]
+        #Fernando
+        """
+        
 
         # Response dependent on whether it is classification
         if self.responses.dim() == 3:
