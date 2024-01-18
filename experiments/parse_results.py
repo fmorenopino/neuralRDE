@@ -28,14 +28,14 @@ def parse_results(folder, dataset, config_name, sort_key='val', average_over=['d
     """
     # Create the frame
     havok_str = 'havok/' if havok else ''
-    ex_dir = ROOT_DIR + '/experiments/models/{}{}/{}/{}'.format(havok_str, folder, dataset, config_name)
+    ex_dir = ROOT_DIR + '/experiments/models_final/{}{}/{}/{}'.format(havok_str, folder, dataset, config_name)
     frame = create_run_frame(ex_dir)
     # Assume a metric
     metric = 'acc' if 'acc.val' in frame.columns else 'loss'
     ascending = True if metric == 'loss' else False
     standard_columns = [
-        'step', 'depth', '{}.test'.format(metric), '{}.train'.format(metric), '{}.val'.format(metric),
-        'num_params', 'true_hidden_dim', 'data__sampler_name', 'memory_usage', 'elapsed_time'
+        '{}.test'.format(metric), '{}.train'.format(metric), '{}.val'.format(metric), 'step', 'depth', 'true_hidden_dim', 'num_layers', 'hidden_hidden_multiplier',
+        'num_params', 'memory_usage', 'elapsed_time'
     ]
     frame = frame[standard_columns]
     # Mean and stddevs if average over is specified.

@@ -199,6 +199,10 @@ class FixedCDEDataset:
         # Responses and params
         self.responses = responses[:, knot_idxs] if responses.dim() == 3 else responses
         self.depth = depth
+        
+        #meter Nans a controls
+        #calcular signature haciendo drop de los nans
+
 
         # Compute the signatures
         self.signatures = torch.stack(

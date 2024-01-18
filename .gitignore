@@ -1,5 +1,5 @@
 #
-experiments/models
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -62,6 +62,8 @@ coverage.xml
 /models/
 /models_tmp/
 /models_tmp*
+experiments/models
+experiments/models_final/
 
 # Mac OS-specific storage files
 .DS_Store
