@@ -63,7 +63,9 @@ coverage.xml
 /models_tmp/
 /models_tmp*
 experiments/models
+experiments/models*
 experiments/models_final/
+/models*/
 
 # Mac OS-specific storage files
 .DS_Store

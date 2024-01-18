@@ -204,7 +204,7 @@ class FixedCDEDataset:
         #calcular signature haciendo drop de los nans
 
         
-        #Fernando
+        #Fernando - RANDOM DROP
         #Uncomment this block to drop random half of the time instants (and comment the next block  )
         """
         idx_removed = sorted(random.sample(range(controls.shape[1]), controls.shape[1]//2))
@@ -215,10 +215,16 @@ class FixedCDEDataset:
         )   
         """
         #Fernando
+
+        #Fernando-Neural CDEs
+
+        #Fernando
+        self.signatures = controls
+
         # Compute the signatures
-        self.signatures = torch.stack(
-            [signatory.logsignature(controls[:, i[0]:i[1]], depth=depth) for i in intervals], dim=1
-        )
+        #self.signatures = torch.stack(
+        #    [signatory.logsignature(controls[:, i[0]:i[1]], depth=depth) for i in intervals], dim=1
+        #)
 
         # Some params
         self.n_samples = self.signatures.size(0)
@@ -268,13 +274,13 @@ class SubsampleDataset:
         inputs = self.controls[batch_idx]
         inputs = inputs[:, idxs]
 
-        """ 
+        
         #Fernando - RANDOM DROP
-        num = inputs.shape[1] // 2
-        idxs_keep = sorted(random.sample(range(inputs.shape[1]), num))
-        inputs = inputs[:, idxs_keep, :]
+        #num = inputs.shape[1] // 2
+        #idxs_keep = sorted(random.sample(range(inputs.shape[1]), num))
+        #inputs = inputs[:, idxs_keep, :]
         #Fernando
-        """
+        
         
 
         # Response dependent on whether it is classification

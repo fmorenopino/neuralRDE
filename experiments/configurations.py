@@ -23,6 +23,15 @@ default = {
         'num_layers': [3],
         'seed': [1234, 4321, 2222],
     },
+    'hyperopt-neural-cde': {
+        'model_type': ['nrde'],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [8, 16, 32, 64, 128, 256],
+        'hidden_hidden_multiplier': [2, 3],
+        'num_layers': [2, 3],
+        'seed': [1234],
+    },
     'hyperopt-main': {
         'model_type': ['nrde'],
         'depth': [3],
@@ -102,7 +111,7 @@ default = {
         'hidden_dim': [8],
         'hidden_hidden_multiplier': [3],
         'num_layers': [1],
-        'seed': [0],
+        'seed': [111, 222, 333, 1234, 4321, 2222],
     },
     'main-odernn': {
         'model_type': ['odernn_folded'],
@@ -163,6 +172,11 @@ configs = {
             },
             'hyperopt': {
                 **default['hyperopt'],
+                'data__batch_size': [512]
+                #'step': [4, 32, 128]    # Total steps [500]
+            },
+            'hyperopt-neural-cde': {
+                **default['hyperopt-neural-cde'],
                 'data__batch_size': [512]
                 #'step': [4, 32, 128]    # Total steps [500]
             },
