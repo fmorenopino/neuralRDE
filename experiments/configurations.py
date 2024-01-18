@@ -16,11 +16,11 @@ default = {
     },
     'hyperopt': {
         'model_type': ['nrde'],
-        'depth': [2],
-        'step': [2],
-        'hidden_dim': [32],
+        'depth': [2,3],
+        'step': [8, 128, 512],
+        'hidden_dim': [64],
         'hidden_hidden_multiplier': [2],
-        'num_layers': [3],
+        'num_layers': [2],
         'seed': [1234],
     },
     'hyperopt-test': {
@@ -143,15 +143,15 @@ configs = {
             },
             'rnn': {
                 **default['rnn'],
-                'data__batch_size': [1024]
+                'data__batch_size': [16]
             },
             'lstm': {
                 **default['lstm'],
-                'data__batch_size': [1024]
+                'data__batch_size': [16]
             },
             'gru': {
                 **default['gru'],
-                'data__batch_size': [1024]
+                'data__batch_size': [16]
             },
             'hyperopt-odernn': {
                 **default['hyperopt-odernn'],
@@ -250,7 +250,7 @@ configs = {
             'hyperopt': {
                 **default['hyperopt'],
                 'data__batch_size': [512],
-                'step': [8],
+                #'step': [8],
             },
             'hyperopt-odernn': {
                 **default['hyperopt-odernn'],

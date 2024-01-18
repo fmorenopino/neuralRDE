@@ -11,7 +11,7 @@ from experiments.configurations import configs
 # CLI's for paralellisation
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--folder', help='Folder that holds the data.', default='TSR')
-parser.add_argument('-ds', '--dataset', help='The name of the dataset to run.', default='BIDMC32RR')
+parser.add_argument('-ds', '--dataset', help='The name of the dataset to run.', default='BIDMC32HR')
 parser.add_argument('-c', '--config', help='The config argument.', default='hyperopt')
 # parser.add_argument('-rm', '--remove_folder', help='Removes the folder if exists and restarts.', action='store_true')
 parser.add_argument('-rm', '--remove_folder', help='Removes the folder if exists and restarts.', action='store_false')
