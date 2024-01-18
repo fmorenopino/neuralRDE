@@ -16,12 +16,21 @@ default = {
     },
     'hyperopt': {
         'model_type': ['nrde'],
-        'depth': [2],
-        'step': [10],
+        'depth': [3],
+        'step': [8],
         'hidden_dim': [64],
         'hidden_hidden_multiplier': [2],
         'num_layers': [2],
-        'seed': [1234],
+        'seed': [1234, 4321, 2222],
+    },
+    'hyperopt-main': {
+        'model_type': ['nrde'],
+        'depth': [3],
+        'step': [8],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [2],
+        'seed': [1234, 4321, 2222],
     },
     'hyperopt-test': {
         'model_type': ['nrde'],
@@ -30,7 +39,7 @@ default = {
         'hidden_dim': [32],
         'hidden_hidden_multiplier': [2],
         'num_layers': [3],
-        'seed': [111, 222, 333],
+        'seed': [1234, 4321, 2222],
     },
     'hyperopt-original': {
         'model_type': ['nrde'],
@@ -39,7 +48,7 @@ default = {
         'hidden_dim': [16, 32, 64],
         'hidden_hidden_multiplier': [2, 3, 4],
         'num_layers': [1, 2, 3],
-        'seed': [1234],
+        'seed': [1234, 4321, 2222],
     },
     'rnn': {
         'model_type': ['rnn'],
@@ -49,6 +58,24 @@ default = {
         'hidden_hidden_multiplier': [2, 3],
         'num_layers': [2, 3],
         'seed': [1234],
+    },
+    'main-rnn': {
+        'model_type': ['rnn'],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [32],
+        'hidden_hidden_multiplier': [2, 3],
+        'num_layers': [3],
+        'seed': [111, 222, 333],
+    },
+    'main-gru': {
+        'model_type': ['rnn'],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [32],
+        'hidden_hidden_multiplier': [2, 3],
+        'num_layers': [3],
+        'seed': [111, 222, 333],
     },
     'lstm': {
         'model_type': ['lstm'],
@@ -77,6 +104,15 @@ default = {
         'num_layers': [1],
         'seed': [0],
     },
+    'main-odernn': {
+        'model_type': ['odernn_folded'],
+        'depth': [1],
+        'step': [128],
+        'hidden_dim': [8],
+        'hidden_hidden_multiplier': [3],
+        'num_layers': [1],
+        'seed': [111, 222, 333],
+    },
     'hyperopt-logsig-rnn': {
         'model_type': ['logsig-rnn'],
         'depth': [1, 2, 3],
@@ -91,18 +127,11 @@ default = {
         'data__batch_size': [128],
         # Main
         'model_type': ['nrde'],
-        'depth': [1, 2, 3],
-        'step': [1, 2, 3, 5, 10, 20, 50],
-        'hyperopt_metric': ['acc'],
-        'seed': [111, 222, 333],
-    },
-    'main-odernn': {
-        # Data
-        'data__batch_size': [128],
-        # Main
-        'model_type': ['odernn_folded'],
-        'depth': [1],
-        'step': [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048],
+        'depth': [3],
+        'step': [8],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [2],
         'hyperopt_metric': ['acc'],
         'seed': [111, 222, 333],
     },
@@ -145,6 +174,14 @@ configs = {
                 **default['rnn'],
                 'data__batch_size': [16]
             },
+            'main-rnn': {
+                **default['main-rnn'],
+                'data__batch_size': [512]
+            },
+            'main-gru': {
+                **default['main-gru'],
+                'data__batch_size': [512]
+            },
             'lstm': {
                 **default['lstm'],
                 'data__batch_size': [16]
@@ -157,6 +194,10 @@ configs = {
                 **default['hyperopt-odernn'],
                 'data__batch_size': [512],
             },
+            'main-odernn': {
+                **default['main-odernn'],
+                'data__batch_size': [512],
+            },
             'hyperopt-logsig-rnn': {
                 **default['hyperopt-logsig-rnn'],
                 'data__batch_size': [1024],
@@ -164,19 +205,7 @@ configs = {
             'main': {
                 **default['main'],
                 'data__batch_size': [1024],
-                'data__adjoint': [True],
-                'hyperopt_metric': ['acc'],
-                'depth': [1, 2, 3],
-                'step': [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
-            },
-            'main-odernn': {
-                **default['main'],
-                'model_type': ['odernn_folded'],
-                'data__batch_size': [1024],
-                'data__adjoint': [True],
-                'hyperopt_metric': ['acc'],
-                'depth': [1],
-                'step': [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
+
             },
         },
     },
@@ -185,6 +214,11 @@ configs = {
     'TSR': {
         'BIDMC32SpO2': {
             'hyperopt': {
+                **default['hyperopt'],
+                'data__batch_size': [512],
+                'step': [8],
+            },
+            'hyperopt-main': {
                 **default['hyperopt'],
                 'data__batch_size': [512],
                 'step': [8],
