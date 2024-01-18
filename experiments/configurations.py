@@ -17,10 +17,10 @@ default = {
     'hyperopt': {
         'model_type': ['nrde'],
         'depth': [3],
-        'step': [8],
-        'hidden_dim': [64],
+        'step': [32],
+        'hidden_dim': [32],
         'hidden_hidden_multiplier': [2],
-        'num_layers': [2],
+        'num_layers': [3],
         'seed': [1234, 4321, 2222],
     },
     'hyperopt-main': {
@@ -163,7 +163,7 @@ configs = {
             },
             'hyperopt': {
                 **default['hyperopt'],
-                'data__batch_size': [2]
+                'data__batch_size': [512]
                 #'step': [4, 32, 128]    # Total steps [500]
             },
             'hyperopt-test': {
