@@ -204,7 +204,7 @@ class FixedCDEDataset:
         #calcular signature haciendo drop de los nans
 
         
-        #Fernando - RANDOM DROP
+        #Fernando - RANDOM DROP - NEURAL RDE
         #Uncomment this block to drop random half of the time instants (and comment the next block  )
         """
         idx_removed = sorted(random.sample(range(controls.shape[1]), controls.shape[1]//2))
@@ -219,13 +219,15 @@ class FixedCDEDataset:
         #Fernando-Neural CDEs
 
         #Fernando
-        self.signatures = controls
+        #self.signatures = controls
 
+        #Original
         # Compute the signatures
-        #self.signatures = torch.stack(
-        #    [signatory.logsignature(controls[:, i[0]:i[1]], depth=depth) for i in intervals], dim=1
-        #)
-
+        self.signatures = torch.stack(
+            [signatory.logsignature(controls[:, i[0]:i[1]], depth=depth) for i in intervals], dim=1
+        )
+        #Original
+        
         # Some params
         self.n_samples = self.signatures.size(0)
         self.ds_length = self.signatures.size(1)
