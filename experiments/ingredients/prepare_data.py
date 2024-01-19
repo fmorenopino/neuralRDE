@@ -15,7 +15,7 @@ from ncdes.data.scalers import TrickScaler
 from ncdes.data.dataset import FixedCDEDataset, FlexibleCDEDataset, SubsampleDataset
 from ncdes.data.intervals import FixedIntervalSampler, RandomSampler, BatchIntervalSampler
 from ncdes.data.functions import linear_interpolation
-from get_data.eigenworms import EigenWorms
+from get_data.eigenworms import EigenWorms, SinusoidalDataset, SinusoidalDatasetLong
 
 data_ingredient = Ingredient('data')
 
@@ -121,26 +121,6 @@ def process_data(ds_folder, ds_name, missing_rate, include_observational_intensi
         controls, responses, output_dim, return_sequences, original_idxs = get_tsr_data(ds_name=ds_name)
     elif ds_folder in ['UEA', 'SpeechCommands']:
         controls, responses, output_dim, return_sequences, original_idxs = get_classification_data(ds_name, ds_folder)
-        #Fernando 
-        """
-        eigenworms = EigenWorms()
-        train_dataset, valid_dataset, test_dataset = eigenworms.get_eigenworms()
-
-        seq_length = train_dataset[0][0].shape[0]
-        seq_length_orig = seq_length
-
-        num_features = train_dataset[0][0].shape[1]
-        num_samples = len(train_dataset)
-        num_classes = 5
-
-        data_loader = DataLoader(train_dataset, shuffle=True, batch_size=10000)
-        val_loader = DataLoader(valid_dataset, shuffle=False, batch_size=len(valid_dataset))
-        test_loader = DataLoader(test_dataset, shuffle=False, batch_size=len(test_dataset))
-        
-        print ('using our own dataloader')
-        return data_loader, val_loader, test_loader, 1, False
-        """
-        #Fernando
     elif ds_folder == 'PhysioNet':
         if ds_name == 'Mortality2012':
             controls, responses, output_dim, return_sequences, original_idxs = get_physionet2012_data()
@@ -148,6 +128,13 @@ def process_data(ds_folder, ds_name, missing_rate, include_observational_intensi
             controls, responses, output_dim, return_sequences, original_idxs = get_physionet2019_data()
     elif ds_folder == 'UJIPenChars2':
         controls, responses, output_dim, return_sequences, original_idxs = get_uji_data()
+    elif ds_folder == 'Other':
+        val_frac = 0.33
+        test_frac = 0.33
+        if ds_name == 'Sinusoidal':
+            controls, responses, output_dim, return_sequences, original_idxs = get_sinusoidal_data()
+        elif ds_name == 'SinusoidalLong':
+            controls, responses, output_dim, return_sequences, original_idxs = get_sinusoidalLong_data()
 
     else:
         raise NotImplementedError('No other getters yet implemented.')

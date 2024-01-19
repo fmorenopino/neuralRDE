@@ -23,6 +23,15 @@ default = {
         'num_layers': [1, 2, 3],
         'seed': [1234],
     },
+    'hyperopt-sinusoidal': {
+        'model_type': ['nrde'],
+        'depth': [2],
+        'step': [2],
+        'hidden_dim': [16, 32, 64],
+        'hidden_hidden_multiplier': [1, 2, 3],
+        'num_layers': [1, 2, 3],
+        'seed': [1234],
+    },
     'hyperopt-hr': {
         'model_type': ['nrde'],
         'depth': [3],
@@ -124,7 +133,79 @@ configs = {
             },
         },
     },
-
+    # Other
+    'Other': {
+        'Sinusoidal': {
+            'test': {
+                **default['test']
+            },
+            'hyperopt': {
+                **default['hyperopt'],
+                'data__batch_size': [1024],
+                'step': [36]    # Total steps [500]
+            },
+            'hyperopt-sinusoidal': {
+                **default['hyperopt-sinusoidal'],
+                'data__batch_size': [1024],
+            },
+            'hyperopt-odernn': {
+                **default['hyperopt-odernn'],
+                'data__batch_size': [512],
+            },
+            'main': {
+                **default['main'],
+                'data__batch_size': [1024],
+                'data__adjoint': [True],
+                'hyperopt_metric': ['acc'],
+                'depth': [1, 2, 3],
+                'step': [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
+            },
+            'main-odernn': {
+                **default['main'],
+                'model_type': ['odernn_folded'],
+                'data__batch_size': [1024],
+                'data__adjoint': [True],
+                'hyperopt_metric': ['acc'],
+                'depth': [1],
+                'step': [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
+            },
+        },
+        'SinusoidalLong': {
+            'test': {
+                **default['test']
+            },
+            'hyperopt': {
+                **default['hyperopt'],
+                'data__batch_size': [1024],
+                'step': [36]    # Total steps [500]
+            },
+            'hyperopt-sinusoidal': {
+                **default['hyperopt-sinusoidal'],
+                'data__batch_size': [1024],
+            },
+            'hyperopt-odernn': {
+                **default['hyperopt-odernn'],
+                'data__batch_size': [512],
+            },
+            'main': {
+                **default['main'],
+                'data__batch_size': [1024],
+                'data__adjoint': [True],
+                'hyperopt_metric': ['acc'],
+                'depth': [1, 2, 3],
+                'step': [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
+            },
+            'main-odernn': {
+                **default['main'],
+                'model_type': ['odernn_folded'],
+                'data__batch_size': [1024],
+                'data__adjoint': [True],
+                'hyperopt_metric': ['acc'],
+                'depth': [1],
+                'step': [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
+            },
+        },
+    },
     # TSR
     'TSR': {
         'BIDMC32SpO2': {

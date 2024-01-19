@@ -35,6 +35,44 @@ def get_classification_data(ds_name, ds_folder=''):
 
     return controls, responses, output_dim, return_sequences, None
 
+def get_sinusoidal_data():
+
+    controls = torch.load('/nfs/home/fernandom/github/neuralRDE/data/processed/Other/Sinusoidal/controls_sinusoidal.pt')
+    responses = torch.load('/nfs/home/fernandom/github/neuralRDE/data/processed/Other/Sinusoidal/responses_sinusoidal.pt').long().view(-1)
+
+    # Ensure responses start at 0
+    responses = responses - responses.min()
+
+    # Some params
+    output_dim = len(torch.unique(responses))
+    return_sequences = False
+
+    # Make times and add to the controls
+    num_samples, length = controls.size()[0:2]
+    times = torch.linspace(0, 1, length).repeat(num_samples, 1).unsqueeze(-1)
+    controls = torch.cat((times, controls), dim=2)
+
+    return controls, responses, output_dim, return_sequences, None
+
+
+def get_sinusoidalLong_data():
+    controls = torch.load('/nfs/home/fernandom/github/neuralRDE/data/processed/Other/SinusoidalLong/controls_sinusoidal_long.pt')
+    responses = torch.load('/nfs/home/fernandom/github/neuralRDE/data/processed/Other/SinusoidalLong/responses_sinusoidal_long.pt').long().view(-1)
+
+    # Ensure responses start at 0
+    responses = responses - responses.min()
+
+    # Some params
+    output_dim = len(torch.unique(responses))
+    return_sequences = False
+
+    # Make times and add to the controls
+    num_samples, length = controls.size()[0:2]
+    times = torch.linspace(0, 1, length).repeat(num_samples, 1).unsqueeze(-1)
+    controls = torch.cat((times, controls), dim=2)
+
+    return controls, responses, output_dim, return_sequences, None
+
 
 def get_physionet2012_data(contained_value_fraction=0.25):
     # Load

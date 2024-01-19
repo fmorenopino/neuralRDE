@@ -86,6 +86,11 @@ def train(model,
     Returns:
         (results:dict, validation_history:dict): The results of the best model and the full training history.
     """
+
+
+    #Fernando - EARLY STOPPING
+    #plateau_terminate = 1000
+    #Fernando
     torch.cuda.init()
     device = set_device(gpu_if_available, gpu_idx=0)
     model.to(device)
