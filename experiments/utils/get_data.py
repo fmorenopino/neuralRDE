@@ -73,6 +73,23 @@ def get_sinusoidalLong_data():
 
     return controls, responses, output_dim, return_sequences, None
 
+def get_LOB_data():
+    controls = torch.load('/nfs/home/fernandom/github/neuralRDE/data/processed/Other/LOB/controls_lob.pt')
+    responses = torch.load('/nfs/home/fernandom/github/neuralRDE/data/processed/Other/LOB/responses_lob.pt').long().view(-1)
+    responses = responses.unsqueeze(1)
+    controls = controls.to(dtype=torch.float32)
+    responses = responses.to(dtype=torch.float32)
+    # Add time
+    times = torch.linspace(0, 1, controls.size(1)).repeat(controls.size(0)).view(-1, controls.size(1), 1)
+    controls = torch.cat((times, controls), dim=2)
+
+    #original_idxs = [list(x.numpy().reshape(-1)) for x in load_pickle(folder + '/original_idxs.pkl')]
+    original_idxs = None
+    return_sequences = False
+    output_dim = 1
+    return controls, responses, output_dim, return_sequences, original_idxs
+
+
 
 def get_physionet2012_data(contained_value_fraction=0.25):
     # Load

@@ -129,12 +129,16 @@ def process_data(ds_folder, ds_name, missing_rate, include_observational_intensi
     elif ds_folder == 'UJIPenChars2':
         controls, responses, output_dim, return_sequences, original_idxs = get_uji_data()
     elif ds_folder == 'Other':
-        val_frac = 0.33
-        test_frac = 0.33
         if ds_name == 'Sinusoidal':
+            val_frac = 0.33
+            test_frac = 0.33
             controls, responses, output_dim, return_sequences, original_idxs = get_sinusoidal_data()
         elif ds_name == 'SinusoidalLong':
+            val_frac = 0.33
+            test_frac = 0.33
             controls, responses, output_dim, return_sequences, original_idxs = get_sinusoidalLong_data()
+        elif ds_name == 'LOB':
+            controls, responses, output_dim, return_sequences, original_idxs = get_LOB_data()
 
     else:
         raise NotImplementedError('No other getters yet implemented.')

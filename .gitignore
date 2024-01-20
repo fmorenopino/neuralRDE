@@ -60,12 +60,13 @@ coverage.xml
 
 # exclude models from source control by default
 /models/
+/models*
 /models_tmp/
 /models_tmp*
 experiments/models
 experiments/models*
 experiments/models_final/
-/models*/
+experiments/hyperopt*
 
 # Mac OS-specific storage files
 .DS_Store
