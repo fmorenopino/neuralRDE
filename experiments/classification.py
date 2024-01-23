@@ -10,9 +10,9 @@ from configurations import configs
 
 # CLI's for paralellisation
 parser = argparse.ArgumentParser()
-config = 'hyperopt-sinusoidalLong-ncde'
-parser.add_argument('-f', '--folder', help='Folder that holds the data.', default='Other') #UEA, Other
-parser.add_argument('-ds', '--dataset', help='The name of the dataset to run.', default='SinusoidalLong')#EigenWorms, Sinusoidal, SinusoidalLong
+config = 'main_ew_gru'
+parser.add_argument('-f', '--folder', help='Folder that holds the data.', default='UEA') #UEA, Other
+parser.add_argument('-ds', '--dataset', help='The name of the dataset to run.', default='EigenWorms')#EigenWorms, Sinusoidal, SinusoidalLong
 parser.add_argument('-c', '--config', help='The config argument.', default=config)#test, hyperopt, hyperopt-test, hyperopt-sinusoidal
 parser.add_argument('-rm', '--remove_folder', help='Removes the folder if exists and restarts.', action='store_false')
 # parser.add_argument('-rm', '--remove_folder', help='Removes the folder if exists and restarts.', action='store_false')
@@ -22,13 +22,15 @@ parser.add_argument('-igpu', '--igpu', help='Integer identifier of the GPU from 
 parser.add_argument('-ngpus', '--num_gpus', help='The total number of GPUs', default=1, type=int)
 args = parser.parse_args()
 
+
 # Save folder
 test_str = '/test' if args.test else ''
 SAVE_DIR = './{}{}/{}/{}/{}'.format(config,test_str, args.folder, args.dataset, args.config)
 handle_resume(SAVE_DIR, True, args.remove_folder)
 
 # Setup configuration parallelisation
-configuration = configs[args.folder][args.dataset][args.config]
+#configuration = configs[args.folder][args.dataset][args.config]
+configuration = configs[args.config]
 configuration = config_parallelisation(configuration, args.igpu, args.num_gpus)
 
 # Setup experiment

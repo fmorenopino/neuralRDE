@@ -72,6 +72,8 @@ experiments/2-steps_depth_validation/
 experiments/3-final_models/
 experiments/hyperopt*
 hyperopt-sinusoidal*
+experiments/old_models/
+experiments/main*
 
 # Mac OS-specific storage files
 .DS_Store

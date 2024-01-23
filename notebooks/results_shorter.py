@@ -43,7 +43,7 @@ def extract_multiindex_step(df, steps=[1, 8, 32, 128]):
 
 #model_name='hyperopt-odernn'
 #ew = parse_results('UEA', 'EigenWorms', model_name, sort_key='test',average_over=None, print_frame=False, pretty_std=False)
-folder = '/nfs/home/fernandom/github/neuralRDE/experiments/1-hyper_validation/sinusoidal/hyperopt-sinusoidal-ncde/Other/Sinusoidal/hyperopt-sinusoidal-ncde'
+folder = '/nfs/home/fernandom/github/neuralRDE/experiments/hyperopt_sin_odernn/Other/Sinusoidal/hyperopt_sin_odernn'
 ew = parse_results(folder, 
                    None, 
                    None, 
@@ -62,7 +62,7 @@ ew.to_csv(csv_directory)
 # %%
 # Get data
 
-
+'''
 #model_name='hyperopt'
 folder = '/nfs/home/fernandom/github/neuralRDE/experiments/hyperopt-hr-odernn/TSR/BIDMC32HR/hyperopt-hr-odernn'
 get_frame = lambda name: parse_results_bidmc(folder, 
@@ -77,3 +77,4 @@ hr = get_frame('BIDMC32HR')
 #hr.to_csv('/nfs/home/fernandom/github/neuralRDE/experiments/models_final/TSR/BIDMC32HR/'+model_name+'/summary_'+model_name+'.csv')
 csv_directory = folder + '/summary_'+folder.split('/')[-1]+'.csv'
 hr.to_csv(csv_directory)
+'''

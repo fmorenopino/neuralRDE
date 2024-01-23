@@ -4,547 +4,407 @@ configurations.py
 Contains the hyper-parameter and final run configurations for each dataset.
 """
 
-default = {
-    'test': {
+configs = {
+    ####################################################-Steps, Depth
+    'hyperopt_sin_ncde': { ##NCDE
+        'model_type': ['nrde'],
+        'data__batch_size': [1024],
+        'depth': [1],
+        'step': [1, 8, 128, 512],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [3],
+        'seed': [1234],
+    },
+    'hyperopt_sinLong_ncde': {
+        'model_type': ['nrde'],
+        'data__batch_size': [1024],
+        'depth': [1],
+        'step': [1, 8, 128, 512],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [3],
+        'seed': [1234],
+    },
+    'hyperopt_ew_ncde': {
+        'model_type': ['nrde'],
+        'data__batch_size': [1024],
+        'depth': [1],
+        'step': [1, 8, 128, 512],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [3],
+        'seed': [1234],
+    },
+    'hyperopt_hr_ncde': {
+        'model_type': ['nrde'],
+        'data__batch_size': [512],
+        'depth': [1],
+        'step': [1, 8, 128, 512],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [3],
+        'seed': [1234],
+    },
+    'hyperopt_lob_ncde': {
+        'model_type': ['nrde'],
+        'data__batch_size': [1024],
+        'depth': [1],
+        'step': [1, 8, 128, 512],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [3],
+        'seed': [1234],
+    },
+    'hyperopt_sin_odernn': { ##ODE_RNN
         'model_type': ['odernn_folded'],
+        'data__batch_size': [1024],
         'depth': [1],
-        'step': [8],
-        'hidden_dim': [1],
-        'hidden_hidden_multiplier': [3],
-        'num_layers': [4],
-        'seed': [0],
+        'step': [1, 8, 128, 512],
+        'hidden_dim': [128],
+        'hidden_hidden_multiplier': [1],
+        'num_layers': [1],
+        'seed': [1234],
     },
-    'hyperopt': {
+    'hyperopt_sinLong_odernn': {
+        'model_type': ['odernn_folded'],
+        'data__batch_size': [1024],
+        'depth': [1],
+        'step': [1, 8, 128, 512],
+        'hidden_dim': [128],
+        'hidden_hidden_multiplier': [1],
+        'num_layers': [1],
+        'seed': [1234],
+    },
+    'hyperopt_ew_odernn': {
+        'model_type': ['odernn_folded'],
+        'data__batch_size': [1024],
+        'depth': [1],
+        'step': [1, 8, 128, 512],
+        'hidden_dim': [128],
+        'hidden_hidden_multiplier': [1],
+        'num_layers': [1],
+        'seed': [1234],
+    },
+    'hyperopt_hr_odernn': {
+        'model_type': ['odernn_folded'],
+        'data__batch_size': [512],
+        'depth': [1],
+        'step': [1, 8, 128, 512],
+        'hidden_dim': [32],
+        'hidden_hidden_multiplier': [1],
+        'num_layers': [1],
+        'seed': [1234],
+    },
+    'hyperopt_lob_odernn': {
+        'model_type': ['odernn_folded'],
+        'data__batch_size': [1024],
+        'depth': [1],
+        'step': [1, 8, 128, 512],
+        'hidden_dim': [128],
+        'hidden_hidden_multiplier': [1],
+        'num_layers': [1],
+        'seed': [1234],
+    },
+    'hyperopt_sin_nrde': { ##NRDE
         'model_type': ['nrde'],
-        'depth': [1],
-        'step': [1],
-        'hidden_dim': [16, 32, 64],
-        'hidden_hidden_multiplier': [2, 3, 4],
-        'num_layers': [1, 2, 3],
-        'seed': [1234],
-    },
-    'hyperopt-sinusoidal-rnn': {
-        'model_type': ['rnn'],
-        'depth': [1],
-        'step': [1],
-        'hidden_dim': [16, 32, 64],
-        'hidden_hidden_multiplier': [1, 2, 3],
-        'num_layers': [1, 2, 3],
-        'seed': [1234],
-    },
-    'hyperopt-sinusoidal-gru': {
-        'model_type': ['gru'],
-        'depth': [1],
-        'step': [1],
-        'hidden_dim': [16, 32, 64],
-        'hidden_hidden_multiplier': [1,2, 3],
-        'num_layers': [1, 2, 3],
-        'seed': [1234],
-    },
-    'hyperopt-sinusoidalLong-rnn': {
-        'model_type': ['rnn'],
-        'depth': [1],
-        'step': [1],
-        'hidden_dim': [16, 32, 64],
-        'hidden_hidden_multiplier': [1, 2, 3],
-        'num_layers': [1, 2, 3],
-        'seed': [1234],
-    },
-    'hyperopt-sinusoidalLong-gru': {
-        'model_type': ['gru'],
-        'depth': [1],
-        'step': [1],
-        'hidden_dim': [16, 32, 64],
-        'hidden_hidden_multiplier': [1, 2, 3],
-        'num_layers': [1, 2, 3],
-        'seed': [1234],
-    },
-    'hyperopt-sinusoidal': {
-        'model_type': ['nrde'],
-        'depth': [1],
-        'step': [1],
-        'hidden_dim': [16, 32, 64],
-        'hidden_hidden_multiplier': [1, 2, 3],
-        'num_layers': [1, 2, 3],
-        'seed': [1234],
-    },
-    'hyperopt-sinusoidal-nrde-ds': {
-        'model_type': ['nrde'],
-        'depth': [2,3],
-        'step': [1,2,4,8,16,32,64,128,256,512,1024,2048],
+        'data__batch_size': [1024],
+        'depth': [2, 3],
+        'step': [2, 4, 8, 16, 24],
         'hidden_dim': [16],
         'hidden_hidden_multiplier': [2],
         'num_layers': [1],
         'seed': [1234],
     },
-    'hyperopt-sinusoidalLong-nrde-ds': {
+    'hyperopt_sinLong_nrde': {
         'model_type': ['nrde'],
+        'data__batch_size': [1024],
         'depth': [2,3],
-        'step': [1,2,4,8,16,32,64,128,256,512,1024,2048],
-        'hidden_dim': [32],
-        'hidden_hidden_multiplier': [3],
+        'step': [2, 4, 8, 16, 24],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [1],
         'num_layers': [3],
         'seed': [1234],
     },
-    'hyperopt-sinusoidal-odernn': {
-        'model_type': ['odernn_folded'],
-        'depth': [1],
-        'step': [1,4,8,32,128],
-        'hidden_dim': [8, 16, 32, 64, 128, 256],
-        'hidden_hidden_multiplier': [1],
-        'num_layers': [1],
-        'seed': [1234],
-    },
-    'hyperopt-sinusoidalLong-odernn': {
-        'model_type': ['odernn_folded'],
-        'depth': [1],
-        'step': [1,4,8,32,128],
-        'hidden_dim': [8, 16, 32, 64, 128, 256],
-        'hidden_hidden_multiplier': [1],
-        'num_layers': [1],
-        'seed': [1234],
-    },
-    'hyperopt-sinusoidal-ncde': {
+    'hyperopt_ew_nrde': {
         'model_type': ['nrde'],
+        'data__batch_size': [1024],
+        'depth': [2,3],
+        'step': [2, 4, 8, 16, 24],
+        'hidden_dim': [32],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [3],
+        'seed': [1234],
+    },
+    'hyperopt_hr_nrde': {
+        'model_type': ['nrde'],
+        'data__batch_size': [512],
+        'depth': [2,3],
+        'step': [2, 4, 8, 16, 24],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [2],
+        'seed': [1234],
+    },
+    'hyperopt_lob_nrde': {
+        'model_type': ['nrde'],
+        'data__batch_size': [1024],
+        'depth': [2,3],
+        'step': [2, 4, 8, 16, 24],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [3],
+        'seed': [1234],
+    },
+    ####################################################_Main
+    'main_sin_ncde': { ##NCDE
+        'model_type': ['nrde'],
+        'data__batch_size': [1024],
         'depth': [1],
         'step': [1],
         'hidden_dim': [64],
-        'hidden_hidden_multiplier': [1, 2, 3],
-        'num_layers': [1, 2, 3],
-        'seed': [1234],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [3],
+        'seed': [111, 222, 333],
     },
-    'hyperopt-hr-ncde': {
+    'main_sinLong_ncde': {
         'model_type': ['nrde'],
+        'data__batch_size': [1024],
         'depth': [1],
         'step': [1],
         'hidden_dim': [64],
-        'hidden_hidden_multiplier': [1, 2, 3],
-        'num_layers': [1, 2, 3],
-        'seed': [1234],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [3],
+        'seed': [111, 222, 333],
     },
-    'hyperopt-sinusoidal-nrde': {
+    'main_ew_ncde': {
         'model_type': ['nrde'],
-        'depth': [1],
-        'step': [1],
-        'hidden_dim': [8, 16, 32, 64, 128, 256],
-        'hidden_hidden_multiplier': [1, 2, 3],
-        'num_layers': [1, 2, 3],
-        'seed': [1234],
-    },
-    'hyperopt-sinusoidalLong-ncde': {
-        'model_type': ['nrde'],
+        'data__batch_size': [1024],
         'depth': [1],
         'step': [1],
         'hidden_dim': [64],
-        'hidden_hidden_multiplier': [1, 2, 3],
-        'num_layers': [1, 2, 3],
-        'seed': [1234],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [3],
+        'seed': [111, 222, 333],
     },
-    'hyperopt-sinusoidalLong-nrde': {
+    'main_hr_ncde': {
         'model_type': ['nrde'],
+        'data__batch_size': [512],
         'depth': [1],
         'step': [1],
-        'hidden_dim': [8, 16, 32, 64, 128, 256],
-        'hidden_hidden_multiplier': [1, 2, 3],
-        'num_layers': [1, 2, 3],
-        'seed': [1234],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [3],
+        'seed': [111, 222, 333],
     },
-    'hyperopt-hr-ncde': {
+    'main_lob_ncde': {
         'model_type': ['nrde'],
+        'data__batch_size': [1024],
         'depth': [1],
         'step': [1],
-        'hidden_dim': [8, 16, 32, 64, 128, 256],
-        'hidden_hidden_multiplier': [1, 2, 3],
-        'num_layers': [1, 2, 3],
-        'seed': [1234],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [3],
+        'seed': [111, 222, 333],
     },
-    'hyperopt-hr-odernn': {
+    'main_sin_odernn': { ##ODE_RNN
         'model_type': ['odernn_folded'],
+        'data__batch_size': [1024],
         'depth': [1],
-        'step': [1,4,8,32,128],
-        'hidden_dim': [8, 16, 32, 64, 128, 256],
+        'step': [1],
+        'hidden_dim': [128],
         'hidden_hidden_multiplier': [1],
         'num_layers': [1],
-        'seed': [1234],
+        'seed': [111, 222, 333],
     },
-    'hyperopt-hr': {
+    'main_sinLong_odernn': {
+        'model_type': ['odernn_folded'],
+        'data__batch_size': [1024],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [128],
+        'hidden_hidden_multiplier': [1],
+        'num_layers': [1],
+        'seed': [111, 222, 333],
+    },
+    'main_ew_odernn': {
+        'model_type': ['odernn_folded'],
+        'data__batch_size': [1024],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [128],
+        'hidden_hidden_multiplier': [1],
+        'num_layers': [1],
+        'seed': [111, 222, 333],
+    },
+    'main_hr_odernn': {
+        'model_type': ['odernn_folded'],
+        'data__batch_size': [512],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [32],
+        'hidden_hidden_multiplier': [1],
+        'num_layers': [1],
+        'seed': [111, 222, 333],
+    },
+    'main_lob_odernn': {
+        'model_type': ['odernn_folded'],
+        'data__batch_size': [1024],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [128],
+        'hidden_hidden_multiplier': [1],
+        'num_layers': [1],
+        'seed': [111, 222, 333],
+    },
+    'main_sin_nrde': { ##NRDE
         'model_type': ['nrde'],
-        'depth': [3],
-        'step': [8],
+        'data__batch_size': [1024],
+        'depth': [2],
+        'step': [1],
+        'hidden_dim': [16],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [1],
+        'seed': [111, 222, 333],
+    },
+    'main_sinLong_nrde': {
+        'model_type': ['nrde'],
+        'data__batch_size': [1024],
+        'depth': [2,3],
+        'step': [1],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [1],
+        'num_layers': [3],
+        'seed': [111, 222, 333],
+    },
+    'main_ew_nrde': {
+        'model_type': ['nrde'],
+        'data__batch_size': [1024],
+        'depth': [2,3],
+        'step': [1, 8, 128, 512],
+        'hidden_dim': [3264],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [3],
+        'seed': [111, 222, 333],
+    },
+    'main_hr_nrde': {
+        'model_type': ['nrde'],
+        'data__batch_size': [512],
+        'depth': [2],
+        'step': [1],
         'hidden_dim': [64],
         'hidden_hidden_multiplier': [2],
         'num_layers': [2],
         'seed': [111, 222, 333],
     },
-    'hyperopt-lob': {
+    'main_lob_nrde': {
         'model_type': ['nrde'],
-        'depth': [3],
-        'step': [8],
+        'data__batch_size': [1024],
+        'depth': [2],
+        'step': [1],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [3],
+        'seed': [111, 222, 333],
+    },
+    'main_sin_rnn': {#RNN
+        'model_type': ['rnn'],
+        'data__batch_size': [1024],
+        'depth': [1],
+        'step': [1],
         'hidden_dim': [32],
         'hidden_hidden_multiplier': [2],
         'num_layers': [2],
         'seed': [111, 222, 333],
     },
-    'hyperopt-odernn': {
-        'model_type': ['odernn_folded'],
+    'main_sinLong_rnn': {
+        'model_type': ['rnn'],
+        'data__batch_size': [1024],
         'depth': [1],
-        'step': [8],
-        'hidden_dim': [8, 16, 32, 64, 128, 256, 388],
-        'hidden_hidden_multiplier': [3],
-        'num_layers': [1],
-        'seed': [0],
-    },
-    'main': {
-        # Data
-        'data__batch_size': [128],
-        # Main
-        'model_type': ['nrde'],
-        'depth': [1, 2, 3],
-        'step': [1, 2, 3, 5, 10, 20, 50],
-        'hyperopt_metric': ['acc'],
+        'step': [1],
+        'hidden_dim': [32],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [2],
         'seed': [111, 222, 333],
     },
-    'main-hr': {
-        # Data
-        'data__batch_size': [512],
-        # Main
-        'model_type': ['nrde'],
-        'depth': [3],
-        'step': [8],
-        'seed': [111, 222, 333],
-    },
-    'main-odernn': {
-        # Data
-        'data__batch_size': [128],
-        # Main
-        'model_type': ['odernn_folded'],
+    'main_ew_rnn': {
+        'model_type': ['rnn'],
+        'data__batch_size': [1024],
         'depth': [1],
-        'step': [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048],
-        'hyperopt_metric': ['acc'],
+        'step': [1],
+        'hidden_dim': [32],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [2],
         'seed': [111, 222, 333],
     },
-    'bidmcmain': {
-        'model_type': ['nrde'],
+    'main_hr_rnn': {
+        'model_type': ['rnn'],
         'data__batch_size': [512],
-        'hyperopt_metric': ['loss'],
-        'depth': [1, 2, 3],
-        'step': [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048],
-        'seed': [111, 222, 333],
-    },
-    'bidmcmain-odernn': {
-        'model_type': ['odernn_folded'],
-        'data__batch_size': [512],
-        'hyperopt_metric': ['loss'],
         'depth': [1],
-        'step': [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048],
+        'step': [1],
+        'hidden_dim': [32],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [2],
         'seed': [111, 222, 333],
     },
-}
-
-
-configs = {
-    # UEA
-    'UEA': {
-        'EigenWorms': {
-            'test': {
-                **default['test']
-            },
-            'hyperopt': {
-                **default['hyperopt'],
-                'data__batch_size': [1024],
-                'step': [36]    # Total steps [500]
-            },
-            'hyperopt-sinusoidal-nrde-ds': {
-                **default['hyperopt-sinusoidal-nrde-ds'],
-                'data__batch_size': [1024]
-            },
-            'hyperopt-odernn': {
-                **default['hyperopt-odernn'],
-                'data__batch_size': [512],
-            },
-            'main': {
-                **default['main'],
-                'data__batch_size': [1024],
-                'data__adjoint': [True],
-                'hyperopt_metric': ['acc'],
-                'depth': [1, 2, 3],
-                'step': [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
-            },
-            'main-odernn': {
-                **default['main'],
-                'model_type': ['odernn_folded'],
-                'data__batch_size': [1024],
-                'data__adjoint': [True],
-                'hyperopt_metric': ['acc'],
-                'depth': [1],
-                'step': [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
-            },
-        },
+    'main_lob_rnn': {
+        'model_type': ['rnn'],
+        'data__batch_size': [1024],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [32],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [2],
+        'seed': [111, 222, 333],
     },
-    # Other
-    'Other': {
-        'Sinusoidal': {
-            'test': {
-                **default['test']
-            },
-            'hyperopt-sinusoidal-nrde-ds': {
-                **default['hyperopt-sinusoidal-nrde-ds'],
-                'data__batch_size': [1024]
-            },
-            'hyperopt': {
-                **default['hyperopt'],
-                'data__batch_size': [1024],
-                'step': [36]    # Total steps [500]
-            },
-            'hyperopt-sinusoidal-ncde': {
-                **default['hyperopt-sinusoidal-ncde'],
-                'data__batch_size': [2048],
-            },
-            'hyperopt-sinusoidal-rnn': {
-                **default['hyperopt-sinusoidal-rnn'],
-                'data__batch_size': [1024],
-            },
-            'hyperopt-sinusoidal-gru': {
-                **default['hyperopt-sinusoidal-gru'],
-                'data__batch_size': [1024],
-            },
-            'hyperopt-sinusoidal-nrde': {
-                **default['hyperopt-sinusoidal-nrde'],
-                'data__batch_size': [1024],
-            },
-            'hyperopt-sinusoidal': {
-                **default['hyperopt-sinusoidal'],
-                'data__batch_size': [1024],
-            },
-            'hyperopt-odernn': {
-                **default['hyperopt-odernn'],
-                'data__batch_size': [512],
-            },
-            'hyperopt-sinusoidal-odernn': {
-                **default['hyperopt-sinusoidal-odernn'],
-                'data__batch_size': [512],
-            },
-            'main': {
-                **default['main'],
-                'data__batch_size': [1024],
-                'data__adjoint': [True],
-                'hyperopt_metric': ['acc'],
-                'depth': [1, 2, 3],
-                'step': [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
-            },
-            'main-odernn': {
-                **default['main'],
-                'model_type': ['odernn_folded'],
-                'data__batch_size': [1024],
-                'data__adjoint': [True],
-                'hyperopt_metric': ['acc'],
-                'depth': [1],
-                'step': [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
-            },
-        },
-        'SinusoidalLong': {
-            'test': {
-                **default['test']
-            },
-            'hyperopt-sinusoidalLong-nrde-ds': {
-                **default['hyperopt-sinusoidalLong-nrde-ds'],
-                'data__batch_size': [1024]
-            },
-            'hyperopt': {
-                **default['hyperopt'],
-                'data__batch_size': [1024],
-                'step': [36]    # Total steps [500]
-            },
-            'hyperopt-sinusoidalLong-rnn': {
-                **default['hyperopt-sinusoidalLong-rnn'],
-                'data__batch_size': [1024],
-            },
-            'hyperopt-sinusoidalLong-gru': {
-                **default['hyperopt-sinusoidalLong-gru'],
-                'data__batch_size': [1024],
-            },
-            'hyperopt-sinusoidal': {
-                **default['hyperopt-sinusoidal'],
-                'data__batch_size': [1024],
-            },
-            'hyperopt-sinusoidal-ncde': {
-                **default['hyperopt-sinusoidal-ncde'],
-                'data__batch_size': [2048],
-            },
-            'hyperopt-sinusoidalLong-nrde': {
-                **default['hyperopt-sinusoidalLong-nrde'],
-                'data__batch_size': [1024],
-            },
-            'hyperopt-sinusoidalLong-ncde': {
-                **default['hyperopt-sinusoidalLong-ncde'],
-                'data__batch_size': [2048],
-            },
-            'hyperopt-sinusoidalLong-odernn': {
-                **default['hyperopt-sinusoidalLong-odernn'],
-                'data__batch_size': [512],
-            },
-            'hyperopt-odernn': {
-                **default['hyperopt-odernn'],
-                'data__batch_size': [512],
-            },
-            'main': {
-                **default['main'],
-                'data__batch_size': [1024],
-                'data__adjoint': [True],
-                'hyperopt_metric': ['acc'],
-                'depth': [1, 2, 3],
-                'step': [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
-            },
-            'main-odernn': {
-                **default['main'],
-                'model_type': ['odernn_folded'],
-                'data__batch_size': [1024],
-                'data__adjoint': [True],
-                'hyperopt_metric': ['acc'],
-                'depth': [1],
-                'step': [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
-            },
-        },
-        'LOB': {
-            'test': {
-                **default['test']
-            },
-            'hyperopt': {
-                **default['hyperopt'],
-                'data__batch_size': [1024],
-                'step': [36]    # Total steps [500]
-            },
-            'hyperopt-lob': {
-                **default['hyperopt-lob'],
-                'data__batch_size': [2048],
-            },
-            'hyperopt-odernn': {
-                **default['hyperopt-odernn'],
-                'data__batch_size': [512],
-            },
-            'main': {
-                **default['main'],
-                'data__batch_size': [1024],
-                'data__adjoint': [True],
-                'hyperopt_metric': ['acc'],
-                'depth': [1, 2, 3],
-                'step': [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
-            },
-            'main-odernn': {
-                **default['main'],
-                'model_type': ['odernn_folded'],
-                'data__batch_size': [1024],
-                'data__adjoint': [True],
-                'hyperopt_metric': ['acc'],
-                'depth': [1],
-                'step': [1, 2, 4, 6, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
-            },
-        },
+    'main_sin_gru': {#GRU
+        'model_type': ['gru'],
+        'data__batch_size': [1024],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [32],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [2],
+        'seed': [111, 222, 333],
     },
-    # TSR
-    'TSR': {
-        'BIDMC32SpO2': {
-            'hyperopt': {
-                **default['hyperopt'],
-                'data__batch_size': [512],
-                'step': [8],
-            },
-            'hyperopt-odernn': {
-                **default['hyperopt-odernn'],
-                'data__batch_size': [512],
-            },
-            'main': {
-                **default['bidmcmain'],
-                'data__adjoint': [True]
-            },
-            'main-odernn': {
-                **default['bidmcmain-odernn'],
-                'data__adjoint': [True],
-            },
-        },
-
-        'BIDMC32RR': {
-            'test_adjoint': {
-                'model_type': ['nrde'],
-                'depth': [3],
-                'step': [300],
-                'hidden_dim': [32],
-                'hidden_hidden_multiplier': [2],
-                'num_layers': [2],
-                'data__batch_size': [512],
-                'data__adjoint': [True],
-                'seed': [1234],
-            },
-            'test': {
-                'model_type': ['nrde'],
-                'depth': [3],
-                'step': [300],
-                'hidden_dim': [32],
-                'hidden_hidden_multiplier': [2],
-                'num_layers': [2],
-                'data__batch_size': [512],
-                'seed': [1234],
-            },
-            'hyperopt': {
-                **default['hyperopt'],
-                'data__batch_size': [512],
-            },
-            'hyperopt-odernn': {
-                **default['hyperopt-odernn'],
-                'data__batch_size': [512],
-            },
-            'main': {
-                **default['bidmcmain'],
-                'data__adjoint': [True]
-            },
-            'main-odernn': {
-                **default['bidmcmain-odernn'],
-                'data__adjoint': [True],
-            },
-        },
-
-        'BIDMC32HR': {
-            'test': {
-                **default['test']
-            },
-            'main-hr': {
-                **default['main-hr'],
-                'data__batch_size': [512],
-            },
-            'hyperopt': {
-                **default['hyperopt'],
-                'data__batch_size': [512],
-                'step': [8],
-            },
-            'hyperopt-hr': {
-                **default['hyperopt-hr'],
-                'data__batch_size': [512],
-            },
-            'hyperopt-hr-ncde': {
-                **default['hyperopt-hr-ncde'],
-                'data__batch_size': [512],
-            },
-            'hyperopt-hr-odernn': {
-                **default['hyperopt-hr-odernn'],
-                'data__batch_size': [512],
-            },
-            'hyperopt-odernn': {
-                **default['hyperopt-odernn'],
-                'data__batch_size': [512],
-            },
-            'main': {
-                **default['bidmcmain'],
-                'data__adjoint': [True]
-            },
-            'main-odernn': {
-                **default['bidmcmain-odernn'],
-                'data__adjoint': [True],
-            },
-            'main_params': {
-                **default['test'],
-                'data__adjoint': [True]
-            },
-        },
+    'main_sinLong_gru': {
+        'model_type': ['gru'],
+        'data__batch_size': [1024],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [32],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [2],
+        'seed': [111, 222, 333],
     },
-
+    'main_ew_gru': {
+        'model_type': ['gru'],
+        'data__batch_size': [1024],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [32],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [2],
+        'seed': [111, 222, 333],
+    },
+    'main_hr_gru': {
+        'model_type': ['gru'],
+        'data__batch_size': [512],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [32],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [2],
+        'seed': [111, 222, 333],
+    },
+    'main_lob_gru': {
+        'model_type': ['gru'],
+        'data__batch_size': [1024],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [32],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [2],
+        'seed': [111, 222, 333],
+    },
 }
