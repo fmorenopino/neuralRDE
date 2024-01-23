@@ -40,11 +40,13 @@ def extract_multiindex_step(df, steps=[1, 8, 32, 128]):
 
 # %%
 # Get data
-'''
-model_name='hyperopt-odernn'
-ew = parse_results('UEA', 
-                   'EigenWorms', 
-                   model_name, 
+
+#model_name='hyperopt-odernn'
+#ew = parse_results('UEA', 'EigenWorms', model_name, sort_key='test',average_over=None, print_frame=False, pretty_std=False)
+folder = '/nfs/home/fernandom/github/neuralRDE/experiments/1-hyper_validation/sinusoidal/hyperopt-sinusoidal-ncde/Other/Sinusoidal/hyperopt-sinusoidal-ncde'
+ew = parse_results(folder, 
+                   None, 
+                   None, 
                    sort_key='test',
                    average_over=None, 
                    print_frame=False, 
@@ -52,17 +54,19 @@ ew = parse_results('UEA',
 ew['acc.test'] = (ew['acc.test'] * 100)
 ew['acc.val'] = (ew['acc.val'] * 100)
 ew['acc.train'] = (ew['acc.train'] * 100)
-
-ew.to_csv('/nfs/home/fernandom/github/neuralRDE/experiments/models_final/UEA/EigenWorms/'+model_name+'/summary_'+model_name+'.csv')
+csv_directory = folder + '/summary_'+folder.split('/')[-1]+'.csv'
+#ew.to_csv('/nfs/home/fernandom/github/neuralRDE/experiments/models_final/UEA/EigenWorms/'+model_name+'/summary_'+model_name+'.csv')
+ew.to_csv(csv_directory)
 # # Creating a BIDMC Results table
-'''
+
 # %%
 # Get data
 
 
-model_name='hyperopt'
-get_frame = lambda name: parse_results_bidmc('TSR/BIDMC32HR', 
-                                       model_name, 
+#model_name='hyperopt'
+folder = '/nfs/home/fernandom/github/neuralRDE/experiments/hyperopt-hr-odernn/TSR/BIDMC32HR/hyperopt-hr-odernn'
+get_frame = lambda name: parse_results_bidmc(folder, 
+                                       None, 
                                        '', 
                                        sort_key='test',
                                        average_over=None, 
@@ -70,72 +74,6 @@ get_frame = lambda name: parse_results_bidmc('TSR/BIDMC32HR',
                                        pretty_std=False)
 #rr = get_frame('BIDMC32RR')
 hr = get_frame('BIDMC32HR')
-hr.to_csv('/nfs/home/fernandom/github/neuralRDE/experiments/models_final/TSR/BIDMC32HR/'+model_name+'/summary_'+model_name+'.csv')
-
-#sp = get_frame('BIDMC32SpO2')
-
-# %% [markdown]
-# If we want just the mean of mem usage, time taken
-
-# %%
-#rr_mean, rr_string = convert_to_mean_std_string(rr)
-hr_mean, hr_string = convert_to_mean_std_string(hr)
-#sp_mean, sp_string = convert_to_mean_std_string(sp)
-
-# %%
-# Mean mem usage
-get_mean = lambda col: pd.concat((rr_mean[col], hr_mean[col], sp_mean[col]), axis=1).mean(axis=1)
-mean_mem = get_mean('memory_usage').astype(int)
-mean_time = get_mean('elapsed_time').astype(int)
-
-# %%
-# Combine
-all_results = pd.concat((rr_string, hr_string, sp_string, mean_mem, mean_time), axis=1)
-all_results = fix_index(all_results)
-
-# %%
-with open('tables/mean_bidmctex.tex', 'w') as file:
-    file.write(all_results.to_latex(escape=False))
-
-# %% [markdown]
-# Suppose we just wanted the full results
-
-# %%
-# All results
-memory = pd.concat([x['memory_usage'] for x in [rr_mean, hr_mean, sp_mean]], axis=1).round(1)
-time = (pd.concat([x['elapsed_time'] for x in [rr_mean, hr_mean, sp_mean]], axis=1) / (60 ** 2)).round(1)
-
-# Combine
-all_results_ = pd.concat((rr_string, hr_string, sp_string, memory, time), axis=1)
-all_results_.reset_index(inplace=True)
-all_results_['depth'] = all_results_['depth'].astype(int)
-all_results_['step'] = all_results_['step'].astype(int)
-all_results_.set_index(['depth', 'step'], inplace=True)
-all_results_.sort_index(level=['depth', 'step'], inplace=True)
-
-# %%
-# Mean the memory usage
-all_results_['mean_memory_usage'] = all_results_['memory_usage'].mean(axis=1).round(1).values
-all_results_.drop('memory_usage', axis=1, inplace=True);
-
-# %%
-all_results_ = all_results_.iloc[[False if x in [20, 50] else True for x in all_results_.index.get_level_values(1)]]
-
-# %%
-output = all_results_.iloc[[True if x in [1, 8, 32, 128] else False for x in all_results_.index.get_level_values(1)]]
-
-# %%
-with open('full_bidmctex.tex', 'w') as file:
-    file.write(output.to_latex(escape=False))
-
-# %%
-with open('tables/bidmc_full.tex', 'w') as file:
-    file.write(all_results_.to_latex(escape=False))
-
-# %%
-all_results_
-
-# %%
-
-
-
+#hr.to_csv('/nfs/home/fernandom/github/neuralRDE/experiments/models_final/TSR/BIDMC32HR/'+model_name+'/summary_'+model_name+'.csv')
+csv_directory = folder + '/summary_'+folder.split('/')[-1]+'.csv'
+hr.to_csv(csv_directory)

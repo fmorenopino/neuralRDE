@@ -28,8 +28,8 @@ default = {
         'depth': [1],
         'step': [1],
         'hidden_dim': [16, 32, 64],
-        'hidden_hidden_multiplier': [2, 3],
-        'num_layers': [2, 3],
+        'hidden_hidden_multiplier': [1, 2, 3],
+        'num_layers': [1, 2, 3],
         'seed': [1234],
     },
     'hyperopt-sinusoidal-gru': {
@@ -37,8 +37,8 @@ default = {
         'depth': [1],
         'step': [1],
         'hidden_dim': [16, 32, 64],
-        'hidden_hidden_multiplier': [2, 3],
-        'num_layers': [2, 3],
+        'hidden_hidden_multiplier': [1,2, 3],
+        'num_layers': [1, 2, 3],
         'seed': [1234],
     },
     'hyperopt-sinusoidalLong-rnn': {
@@ -46,8 +46,8 @@ default = {
         'depth': [1],
         'step': [1],
         'hidden_dim': [16, 32, 64],
-        'hidden_hidden_multiplier': [2, 3],
-        'num_layers': [2, 3],
+        'hidden_hidden_multiplier': [1, 2, 3],
+        'num_layers': [1, 2, 3],
         'seed': [1234],
     },
     'hyperopt-sinusoidalLong-gru': {
@@ -55,8 +55,8 @@ default = {
         'depth': [1],
         'step': [1],
         'hidden_dim': [16, 32, 64],
-        'hidden_hidden_multiplier': [2, 3],
-        'num_layers': [2, 3],
+        'hidden_hidden_multiplier': [1, 2, 3],
+        'num_layers': [1, 2, 3],
         'seed': [1234],
     },
     'hyperopt-sinusoidal': {
@@ -66,6 +66,24 @@ default = {
         'hidden_dim': [16, 32, 64],
         'hidden_hidden_multiplier': [1, 2, 3],
         'num_layers': [1, 2, 3],
+        'seed': [1234],
+    },
+    'hyperopt-sinusoidal-nrde-ds': {
+        'model_type': ['nrde'],
+        'depth': [2,3],
+        'step': [1,2,4,8,16,32,64,128,256,512,1024,2048],
+        'hidden_dim': [16],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [1],
+        'seed': [1234],
+    },
+    'hyperopt-sinusoidalLong-nrde-ds': {
+        'model_type': ['nrde'],
+        'depth': [2,3],
+        'step': [1,2,4,8,16,32,64,128,256,512,1024,2048],
+        'hidden_dim': [32],
+        'hidden_hidden_multiplier': [3],
+        'num_layers': [3],
         'seed': [1234],
     },
     'hyperopt-sinusoidal-odernn': {
@@ -90,7 +108,16 @@ default = {
         'model_type': ['nrde'],
         'depth': [1],
         'step': [1],
-        'hidden_dim': [8, 16, 32, 64, 128, 256],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [1, 2, 3],
+        'num_layers': [1, 2, 3],
+        'seed': [1234],
+    },
+    'hyperopt-hr-ncde': {
+        'model_type': ['nrde'],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [64],
         'hidden_hidden_multiplier': [1, 2, 3],
         'num_layers': [1, 2, 3],
         'seed': [1234],
@@ -108,7 +135,7 @@ default = {
         'model_type': ['nrde'],
         'depth': [1],
         'step': [1],
-        'hidden_dim': [8, 16, 32, 64, 128, 256],
+        'hidden_dim': [64],
         'hidden_hidden_multiplier': [1, 2, 3],
         'num_layers': [1, 2, 3],
         'seed': [1234],
@@ -120,6 +147,24 @@ default = {
         'hidden_dim': [8, 16, 32, 64, 128, 256],
         'hidden_hidden_multiplier': [1, 2, 3],
         'num_layers': [1, 2, 3],
+        'seed': [1234],
+    },
+    'hyperopt-hr-ncde': {
+        'model_type': ['nrde'],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [8, 16, 32, 64, 128, 256],
+        'hidden_hidden_multiplier': [1, 2, 3],
+        'num_layers': [1, 2, 3],
+        'seed': [1234],
+    },
+    'hyperopt-hr-odernn': {
+        'model_type': ['odernn_folded'],
+        'depth': [1],
+        'step': [1,4,8,32,128],
+        'hidden_dim': [8, 16, 32, 64, 128, 256],
+        'hidden_hidden_multiplier': [1],
+        'num_layers': [1],
         'seed': [1234],
     },
     'hyperopt-hr': {
@@ -209,6 +254,10 @@ configs = {
                 'data__batch_size': [1024],
                 'step': [36]    # Total steps [500]
             },
+            'hyperopt-sinusoidal-nrde-ds': {
+                **default['hyperopt-sinusoidal-nrde-ds'],
+                'data__batch_size': [1024]
+            },
             'hyperopt-odernn': {
                 **default['hyperopt-odernn'],
                 'data__batch_size': [512],
@@ -238,6 +287,10 @@ configs = {
             'test': {
                 **default['test']
             },
+            'hyperopt-sinusoidal-nrde-ds': {
+                **default['hyperopt-sinusoidal-nrde-ds'],
+                'data__batch_size': [1024]
+            },
             'hyperopt': {
                 **default['hyperopt'],
                 'data__batch_size': [1024],
@@ -245,7 +298,7 @@ configs = {
             },
             'hyperopt-sinusoidal-ncde': {
                 **default['hyperopt-sinusoidal-ncde'],
-                'data__batch_size': [1024],
+                'data__batch_size': [2048],
             },
             'hyperopt-sinusoidal-rnn': {
                 **default['hyperopt-sinusoidal-rnn'],
@@ -293,6 +346,10 @@ configs = {
             'test': {
                 **default['test']
             },
+            'hyperopt-sinusoidalLong-nrde-ds': {
+                **default['hyperopt-sinusoidalLong-nrde-ds'],
+                'data__batch_size': [1024]
+            },
             'hyperopt': {
                 **default['hyperopt'],
                 'data__batch_size': [1024],
@@ -312,15 +369,15 @@ configs = {
             },
             'hyperopt-sinusoidal-ncde': {
                 **default['hyperopt-sinusoidal-ncde'],
-                'data__batch_size': [1024],
+                'data__batch_size': [2048],
             },
             'hyperopt-sinusoidalLong-nrde': {
                 **default['hyperopt-sinusoidalLong-nrde'],
                 'data__batch_size': [1024],
             },
             'hyperopt-sinusoidalLong-ncde': {
-                **default['hyperopt-sinusoidal-ncde'],
-                'data__batch_size': [1024],
+                **default['hyperopt-sinusoidalLong-ncde'],
+                'data__batch_size': [2048],
             },
             'hyperopt-sinusoidalLong-odernn': {
                 **default['hyperopt-sinusoidalLong-odernn'],
@@ -461,6 +518,14 @@ configs = {
             },
             'hyperopt-hr': {
                 **default['hyperopt-hr'],
+                'data__batch_size': [512],
+            },
+            'hyperopt-hr-ncde': {
+                **default['hyperopt-hr-ncde'],
+                'data__batch_size': [512],
+            },
+            'hyperopt-hr-odernn': {
+                **default['hyperopt-hr-odernn'],
                 'data__batch_size': [512],
             },
             'hyperopt-odernn': {

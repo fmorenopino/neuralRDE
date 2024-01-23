@@ -28,7 +28,8 @@ def parse_results(folder, dataset, config_name, sort_key='val', average_over=['d
     """
     # Create the frame
     havok_str = 'havok/' if havok else ''
-    ex_dir = ROOT_DIR + '/experiments/models_final/{}{}/{}/{}'.format(havok_str, folder, dataset, config_name)
+    #ex_dir = ROOT_DIR + '/experiments/models_final/{}{}/{}/{}'.format(havok_str, folder, dataset, config_name)
+    ex_dir = folder
     frame = create_run_frame(ex_dir)
     # Assume a metric
     metric = 'acc' if 'acc.val' in frame.columns else 'loss'
@@ -73,7 +74,8 @@ def parse_results_bidmc(folder, dataset, config_name, sort_key='val', average_ov
     """
     # Create the frame
     havok_str = 'havok/' if havok else ''
-    ex_dir = ROOT_DIR + '/experiments/models_final/{}{}/{}/{}'.format(havok_str, folder, dataset, config_name)
+    #ex_dir = ROOT_DIR + '/experiments/models_final/{}{}/{}/{}'.format(havok_str, folder, dataset, config_name)
+    ex_dir = folder
     frame = create_run_frame(ex_dir)
     # Assume a metric
     metric =  'loss'
