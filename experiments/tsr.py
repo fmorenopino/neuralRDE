@@ -10,7 +10,7 @@ from experiments.configurations import configs
 
 # CLI's for paralellisation
 parser = argparse.ArgumentParser()
-config = 'hyperopt_hr_nrde'
+config = 'main_hr_gru'
 parser.add_argument('-f', '--folder', help='Folder that holds the data.', default='TSR')#TSR, Other
 parser.add_argument('-ds', '--dataset', help='The name of the dataset to run.', default='BIDMC32HR')#BIDMC32HR, LOB
 parser.add_argument('-c', '--config', help='The config argument.', default=config)#hyperopt-lob
@@ -24,7 +24,7 @@ args = parser.parse_args()
 
 # Save folder
 test_str = '/test' if args.test else ''
-SAVE_DIR = './hyperopt-hr-odernn{}/{}/{}/{}'.format(test_str, args.folder, args.dataset, args.config)
+SAVE_DIR = './{}{}/{}/{}/{}'.format(config,test_str, args.folder, args.dataset, args.config)
 handle_resume(SAVE_DIR, True, args.remove_folder)
 
 # Setup configuration parallelisation

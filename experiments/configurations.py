@@ -165,7 +165,7 @@ configs = {
         'hidden_dim': [64],
         'hidden_hidden_multiplier': [2],
         'num_layers': [3],
-        'seed': [111, 222, 333],
+        'seed': [111],
     },
     'main_sinLong_ncde': {
         'model_type': ['nrde'],
@@ -175,7 +175,7 @@ configs = {
         'hidden_dim': [64],
         'hidden_hidden_multiplier': [2],
         'num_layers': [3],
-        'seed': [111, 222, 333],
+        'seed': [111],
     },
     'main_ew_ncde': {
         'model_type': ['nrde'],
@@ -215,7 +215,7 @@ configs = {
         'hidden_dim': [128],
         'hidden_hidden_multiplier': [1],
         'num_layers': [1],
-        'seed': [111, 222, 333],
+        'seed': [111],
     },
     'main_sinLong_odernn': {
         'model_type': ['odernn_folded'],
@@ -225,7 +225,7 @@ configs = {
         'hidden_dim': [128],
         'hidden_hidden_multiplier': [1],
         'num_layers': [1],
-        'seed': [111, 222, 333],
+        'seed': [111],
     },
     'main_ew_odernn': {
         'model_type': ['odernn_folded'],
@@ -265,7 +265,7 @@ configs = {
         'hidden_dim': [16],
         'hidden_hidden_multiplier': [2],
         'num_layers': [1],
-        'seed': [111, 222, 333],
+        'seed': [111],
     },
     'main_sinLong_nrde': {
         'model_type': ['nrde'],
@@ -275,7 +275,7 @@ configs = {
         'hidden_dim': [64],
         'hidden_hidden_multiplier': [1],
         'num_layers': [3],
-        'seed': [111, 222, 333],
+        'seed': [111],
     },
     'main_ew_nrde': {
         'model_type': ['nrde'],
@@ -315,7 +315,7 @@ configs = {
         'hidden_dim': [32],
         'hidden_hidden_multiplier': [2],
         'num_layers': [2],
-        'seed': [111, 222, 333],
+        'seed': [111],
     },
     'main_sinLong_rnn': {
         'model_type': ['rnn'],
@@ -325,7 +325,7 @@ configs = {
         'hidden_dim': [32],
         'hidden_hidden_multiplier': [2],
         'num_layers': [2],
-        'seed': [111, 222, 333],
+        'seed': [111],
     },
     'main_ew_rnn': {
         'model_type': ['rnn'],
@@ -365,7 +365,7 @@ configs = {
         'hidden_dim': [32],
         'hidden_hidden_multiplier': [2],
         'num_layers': [2],
-        'seed': [111, 222, 333],
+        'seed': [111],
     },
     'main_sinLong_gru': {
         'model_type': ['gru'],
@@ -375,7 +375,7 @@ configs = {
         'hidden_dim': [32],
         'hidden_hidden_multiplier': [2],
         'num_layers': [2],
-        'seed': [111, 222, 333],
+        'seed': [111],
     },
     'main_ew_gru': {
         'model_type': ['gru'],

@@ -278,9 +278,9 @@ class SubsampleDataset:
 
         
         #Fernando - RANDOM DROP
-        #num = inputs.shape[1] // 2
-        #idxs_keep = sorted(random.sample(range(inputs.shape[1]), num))
-        #inputs = inputs[:, idxs_keep, :]
+        num = inputs.shape[1] // 2
+        idxs_keep = sorted(random.sample(range(inputs.shape[1]), num))
+        inputs = inputs[:, idxs_keep, :]
         #Fernando
         
         

@@ -120,7 +120,7 @@ def train(model,
     def log_validation_metrics(engine):
         epoch = engine.state.epoch
         pbar.update(1)
-
+        
         if (epoch % epoch_per_metric == 0) or (epoch == 0):
             evaluator.run(val_dl, max_epochs=1)
 
