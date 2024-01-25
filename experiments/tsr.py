@@ -10,7 +10,7 @@ from experiments.configurations import configs
 
 # CLI's for paralellisation
 parser = argparse.ArgumentParser()
-config = 'main_hr_gru'
+config = 'main_hr_ncde_drop'
 parser.add_argument('-f', '--folder', help='Folder that holds the data.', default='TSR')#TSR, Other
 parser.add_argument('-ds', '--dataset', help='The name of the dataset to run.', default='BIDMC32HR')#BIDMC32HR, LOB
 parser.add_argument('-c', '--config', help='The config argument.', default=config)#hyperopt-lob

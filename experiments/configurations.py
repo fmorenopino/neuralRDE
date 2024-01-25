@@ -187,7 +187,17 @@ configs = {
         'num_layers': [3],
         'seed': [111, 222, 333],
     },
-    'main_hr_ncde': {
+    'main_hr_ncde_full': {
+        'model_type': ['nrde'],
+        'data__batch_size': [512],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [3],
+        'seed': [111, 222, 333],
+    },
+    'main_hr_ncde_drop': {
         'model_type': ['nrde'],
         'data__batch_size': [512],
         'depth': [1],
@@ -260,8 +270,8 @@ configs = {
     'main_sin_nrde': { ##NRDE
         'model_type': ['nrde'],
         'data__batch_size': [1024],
-        'depth': [2],
-        'step': [1],
+        'depth': [3],
+        'step': [8],
         'hidden_dim': [16],
         'hidden_hidden_multiplier': [2],
         'num_layers': [1],
@@ -270,8 +280,8 @@ configs = {
     'main_sinLong_nrde': {
         'model_type': ['nrde'],
         'data__batch_size': [1024],
-        'depth': [2,3],
-        'step': [1],
+        'depth': [3],
+        'step': [8],
         'hidden_dim': [64],
         'hidden_hidden_multiplier': [1],
         'num_layers': [3],

@@ -43,7 +43,7 @@ def extract_multiindex_step(df, steps=[1, 8, 32, 128]):
 
 #model_name='hyperopt-odernn'
 #ew = parse_results('UEA', 'EigenWorms', model_name, sort_key='test',average_over=None, print_frame=False, pretty_std=False)
-folder = '/nfs/home/fernandom/github/neuralRDE/experiments/hyperopt_sin_odernn/Other/Sinusoidal/hyperopt_sin_odernn'
+folder = 'experiments/hyperopt_sinLong_nrde/Other/SinusoidalLong/hyperopt_sinLong_nrde'
 ew = parse_results(folder, 
                    None, 
                    None, 

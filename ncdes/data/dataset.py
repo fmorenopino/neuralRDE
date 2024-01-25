@@ -206,14 +206,14 @@ class FixedCDEDataset:
         
         #Fernando - RANDOM DROP - NEURAL RDE
         #Uncomment this block to drop random half of the time instants (and comment the next block  )
-        """
+        
         idx_removed = sorted(random.sample(range(controls.shape[1]), controls.shape[1]//2))
         idx_keep = list(set(range(controls.shape[1])) - set(idx_removed))
 
         self.signatures = torch.stack(
             [signatory.logsignature(controls[:, [x for x in idx_keep if i[0] < x < i[1]]], depth=depth) for i in intervals], dim=1
         )   
-        """
+        
         #Fernando
 
         #Fernando-Neural CDEs
@@ -278,9 +278,11 @@ class SubsampleDataset:
 
         
         #Fernando - RANDOM DROP
+        """
         num = inputs.shape[1] // 2
         idxs_keep = sorted(random.sample(range(inputs.shape[1]), num))
         inputs = inputs[:, idxs_keep, :]
+        """
         #Fernando
         
         

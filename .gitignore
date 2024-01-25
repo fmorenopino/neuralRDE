@@ -75,6 +75,7 @@ hyperopt-sinusoidal*
 experiments/old_models/
 experiments/main*
 experiments/old*
+experiments/downloaded*
 
 # Mac OS-specific storage files
 .DS_Store
