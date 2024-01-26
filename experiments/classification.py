@@ -7,12 +7,12 @@ from ingredients.trainer import train_ingredient, train
 from ingredients.prepare_data import data_ingredient, ready_all_data_and_model
 from utils.functions import save_pickle
 from configurations import configs
-
+import pandas as pd
 # CLI's for paralellisation
 parser = argparse.ArgumentParser()
-config = 'hyperopt_ew_nrde'
-parser.add_argument('-f', '--folder', help='Folder that holds the data.', default='UEA') #UEA, Other
-parser.add_argument('-ds', '--dataset', help='The name of the dataset to run.', default='EigenWorms')#Sinusoidal, Sinusoidal, SinusoidalLong
+config = 'main_sin_nrde_prueba'
+parser.add_argument('-f', '--folder', help='Folder that holds the data.', default='Other') #UEA, Other
+parser.add_argument('-ds', '--dataset', help='The name of the dataset to run.', default='SinusoidalLong')#Sinusoidal, Sinusoidal, SinusoidalLong
 parser.add_argument('-c', '--config', help='The config argument.', default=config)#test, hyperopt, hyperopt-test, hyperopt-sinusoidal
 parser.add_argument('-rm', '--remove_folder', help='Removes the folder if exists and restarts.', action='store_false')
 # parser.add_argument('-rm', '--remove_folder', help='Removes the folder if exists and restarts.', action='store_false')
@@ -103,6 +103,8 @@ def main(_run,
     for name, value in results.items():
         _run.log_scalar(name, value)
     save_pickle(history, _run.save_dir + '/validation_history.pkl')
+    df = pd.DataFrame((history['acc.val']))
+    df.to_csv(_run.save_dir+'/test_error.csv')
 
 
 if __name__ == '__main__':

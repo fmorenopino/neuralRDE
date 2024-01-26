@@ -40,10 +40,10 @@ def extract_multiindex_step(df, steps=[1, 8, 32, 128]):
 
 # %%
 # Get data
-
+'''
 #model_name='hyperopt-odernn'
 #ew = parse_results('UEA', 'EigenWorms', model_name, sort_key='test',average_over=None, print_frame=False, pretty_std=False)
-folder = 'experiments/hyperopt_sinLong_nrde/Other/SinusoidalLong/hyperopt_sinLong_nrde'
+folder = '/nfs/home/fernandom/github/neuralRDE/experiments/hyperopt_ew_nrde/UEA/EigenWorms/hyperopt_ew_nrde'
 ew = parse_results(folder, 
                    None, 
                    None, 
@@ -64,7 +64,7 @@ ew.to_csv(csv_directory)
 
 '''
 #model_name='hyperopt'
-folder = '/nfs/home/fernandom/github/neuralRDE/experiments/hyperopt-hr-odernn/TSR/BIDMC32HR/hyperopt-hr-odernn'
+folder = '/nfs/home/fernandom/github/neuralRDE/experiments/hyperopt_hr_nrde/TSR/BIDMC32HR/hyperopt_hr_nrde'
 get_frame = lambda name: parse_results_bidmc(folder, 
                                        None, 
                                        '', 
@@ -77,4 +77,3 @@ hr = get_frame('BIDMC32HR')
 #hr.to_csv('/nfs/home/fernandom/github/neuralRDE/experiments/models_final/TSR/BIDMC32HR/'+model_name+'/summary_'+model_name+'.csv')
 csv_directory = folder + '/summary_'+folder.split('/')[-1]+'.csv'
 hr.to_csv(csv_directory)
-'''
