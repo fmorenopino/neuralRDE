@@ -108,8 +108,8 @@ def ready_all_data_and_model(_run,
         _run.log_scalar('true_hidden_dim', model.hidden_dim)
         _run.log_scalar('model_summary', repr(model))
 
-    return model, train_dl, val_dl, test_dl
-    #return model, train_dl, test_dl, test_dl
+    #return model, train_dl, val_dl, test_dl
+    return model, train_dl, test_dl, test_dl
 
 
 @data_ingredient.capture

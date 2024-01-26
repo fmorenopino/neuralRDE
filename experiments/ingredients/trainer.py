@@ -89,7 +89,7 @@ def train(model,
 
 
     #Fernando - EARLY STOPPING
-    #plateau_terminate = 1000
+    plateau_terminate = 1000
     #Fernando
     torch.cuda.init()
     device = set_device(gpu_if_available, gpu_idx=0)

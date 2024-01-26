@@ -10,9 +10,9 @@ from configurations import configs
 import pandas as pd
 # CLI's for paralellisation
 parser = argparse.ArgumentParser()
-config = 'main_sin_nrde_prueba'
+config = 'main_sin_ncde_drop'
 parser.add_argument('-f', '--folder', help='Folder that holds the data.', default='Other') #UEA, Other
-parser.add_argument('-ds', '--dataset', help='The name of the dataset to run.', default='SinusoidalLong')#Sinusoidal, Sinusoidal, SinusoidalLong
+parser.add_argument('-ds', '--dataset', help='The name of the dataset to run.', default='SinusoidalLong')#Sinusoidal, SinusoidalLong, EigenWorms
 parser.add_argument('-c', '--config', help='The config argument.', default=config)#test, hyperopt, hyperopt-test, hyperopt-sinusoidal
 parser.add_argument('-rm', '--remove_folder', help='Removes the folder if exists and restarts.', action='store_false')
 # parser.add_argument('-rm', '--remove_folder', help='Removes the folder if exists and restarts.', action='store_false')
