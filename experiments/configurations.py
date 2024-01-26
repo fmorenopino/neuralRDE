@@ -167,7 +167,7 @@ configs = {
         'num_layers': [3],
         'seed': [111, 222, 333],
     },
-    'main_sin_ncde_drop': { ##NCDE
+    'main_sin_ncde_drop': {
         'model_type': ['nrde'],
         'data__batch_size': [124],
         'depth': [1],
@@ -178,6 +178,16 @@ configs = {
         'seed': [111, 222, 333],
     },
     'main_sinLong_ncde': {
+        'model_type': ['nrde'],
+        'data__batch_size': [124],
+        'depth': [1],
+        'step': [1],
+        'hidden_dim': [64],
+        'hidden_hidden_multiplier': [2],
+        'num_layers': [3],
+        'seed': [111, 222, 333],
+    },
+    'main_sinLong_ncde_drop': {
         'model_type': ['nrde'],
         'data__batch_size': [124],
         'depth': [1],

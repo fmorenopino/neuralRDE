@@ -231,7 +231,8 @@ class FixedCDEDataset:
         selected_time_instants = sorted(random.sample(range(num_time_instants), num_time_instants // 2))
         selected_controls = controls[:, selected_time_instants, :]
         self.signatures = selected_controls
-
+        #Fernando
+        
         #Original
         # Compute the signatures
         #self.signatures = torch.stack(
